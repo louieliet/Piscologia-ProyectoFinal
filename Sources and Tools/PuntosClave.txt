@@ -1,0 +1,13 @@
+id Ceja Izquierda: 65
+id Punto Ojo Izquierdo: 158
+id Ceja Derecha: 295
+id Ojo Derecho: 385
+id mejila izq = 280
+
+
+
+Dif para ceja abajo: <30
+Dif para ceja levantada: 45<
+
+
+
