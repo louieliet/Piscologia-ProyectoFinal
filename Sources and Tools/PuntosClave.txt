@@ -1,18 +1,5 @@
-Puntos clave:
-    id Ceja Izquierda: 65
-    id Punto Ojo Izquierdo: 158
-    id Ceja Derecha: 295
-    id Ojo Derecho: 385
-    id mejila izq = 280
-    id mejilla derecha = 50
-    
 
-
-
-
-Dif para ceja abajo: <30
-Dif para ceja levantada: 45<
-Dif para mejilla levantada <70
-
-
+Boca apertura >35
+Mejilla levantada <19
+Ojera <6
 

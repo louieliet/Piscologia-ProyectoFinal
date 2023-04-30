@@ -8,7 +8,7 @@ def distanceCalculator(x1, x2, y1, y2):
     return distance
 
 #Input Cam
-res = [1920, 1080]
+res = [1280, 720]
 cap = cv2.VideoCapture(1)
 cap.set(3, res[0])
 cap.set(4, res[1])
@@ -55,7 +55,7 @@ while True:
             if len(points) == len(face_points):
                 pixel_width = abs(points[0][0] - points[3][0])
                 distance = (known_width * focal_length) / pixel_width
-                print(distance)
+                #print(distance)
                 cv2.putText(frame, f"{distance:.2f} cm", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
             for id, points in enumerate(face.landmark):
@@ -64,52 +64,54 @@ while True:
                 lista.append([id, xo, yo])
 
         
-                cv2.putText(frame, str(id), (xo,yo), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,0), 1)
+                #cv2.putText(frame, str(id), (xo,yo), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,0), 1)
 
-                if len(lista) == 468 and distance < 100.0:
+                if len(lista) == 468 and distance < 278.76:
 
                     #Felicidad
                     
                     #Mejilla izq - Ojo izq
                     x, y = lista[266][1:]
                     x1, y1 = lista[374][1:]
-
                     d1 = distanceCalculator(x, x1, y, y1)
-                    #print(d1)
-
-                    cv2.line(frame, (x,y), (x1,y1), (0,0,0), 3)
+                    #cv2.line(frame, (x,y), (x1,y1), (0,0,0), 3)
 
                     #Boca apertura 
                     x2, y2 = lista[185][1:]
                     x3, y3 = lista[409][1:]
-
                     d2 = distanceCalculator(x2, x3, y2, y3)
-                    
-                    cv2.line(frame, (x2,y2), (x3,y3), (0,0,0), 3)
+                    #cv2.line(frame, (x2,y2), (x3,y3), (0,0,0), 3)
                     
 
                     #Mejilla der - Ojo der
                     x4, y4 = lista[36][1:]
                     x5, y5 = lista[145][1:]
+                    d3 = distanceCalculator(x4, x5, y4, y5)
+                    #cv2.line(frame, (x4,y4), (x5,y5), (0,0,0), 3)
+
 
                     #Ojera izq - Ojo izq
                     x6, y6 = lista[449][1:]
                     x7, y7 = lista[373][1:]
+                    d4 = distanceCalculator(x6, x7, y6, y7)
+                    #cv2.line(frame, (x6,y6), (x7,y7), (0,0,0), 3)
 
+                    #Ojera der - Ojo der
+                    x8, y8 = lista[229][1:]
+                    x9, y9 = lista[144][1:]
+                    d5 = distanceCalculator(x8, x9, y8, y9)
 
-                    if (d1 < 70):
+                    promedio = (d1 + d2 + d3 + d4 + d5) / 5
+
+                    print(promedio)
+
+                    if (promedio < 22 and promedio > 20):
                         cv2.putText(frame, "Feliz", (480, 80), cv2.FONT_HERSHEY_PLAIN, 2, (0,0,255), 1)
                 
-                if distance > 100.0:
+                if distance > 218.76:
                     cv2.putText(frame, "No se puede detectar", (480, 80), cv2.FONT_HERSHEY_PLAIN, 2, (0,0,255), 1)
                     
                     
-                
-
-
-                    
-                    
-
     cv2.imshow("Reconocimiento Emociones", frame)
     k = cv2.waitKey(1)
 
