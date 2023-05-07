@@ -1,5 +1,20 @@
 
-Boca apertura >35
-Mejilla levantada <19
-Ojera <6
+Mejilla:
+    <60 -> Levantada
+    =60 -> Normal
 
+Gallitos:
+    =18 -> Felicidad
+
+Boca:
+    >100 -> Abierta a los lados
+
+    De boca a mejilla:
+        =46 -> Normal
+        =35 -> Boca abierta
+
+
+Ojo:
+    =15 -> Cerrado
+    =25 -> Normal
+    
