@@ -4,42 +4,42 @@ import math
 import numpy as np
 
 class facialDetection():
-    def __init__(self):
-        self.res = [1280, 720]
-        self.cap = cv2.VideoCapture(1)
-        self.cap.set(3, self.res[0])
-        self.cap.set(4, self.res[1])
+    def __init__(self, win_width, win_height, cam):
+        self._res = [win_width, win_height]
+        self._cap = cv2.VideoCapture(cam)
+        self._cap.set(3, self._res[0])
+        self._cap.set(4, self._res[1])
         #Creamos función de dibujo
-        self.mpDraw = mp.solutions.drawing_utils
-        self.drawSettings = self.mpDraw.DrawingSpec(thickness=1, circle_radius= 1)
+        self._mpDraw = mp.solutions.drawing_utils
+        self._drawSettings = self._mpDraw.DrawingSpec(thickness=1, circle_radius= 1)
 
         #Almacenando la malla facial
-        self.mpFacialMesh = mp.solutions.face_mesh
-        self.facialMesh = self.mpFacialMesh.FaceMesh(max_num_faces= 2)
+        self._mpFacialMesh = mp.solutions.face_mesh
+        self._facialMesh = self._mpFacialMesh.FaceMesh(max_num_faces= 2)
 
         # Constantes para la triangulación
-        self.focal_length = 875 # Valor aproximado para la cámara de la laptop
-        self.known_distance = 50 # Distancia en cm de la persona a la cámara para calibración
-        self.known_width = 16 # Ancho en cm del rostro de la persona para calibración
-        self.face_points = [33, 133, 362, 263] # Puntos clave de la cara (nariz, barbilla, ojos)
+        self._focal_length = 875 # Valor aproximado para la cámara de la laptop
+        self._known_distance = 50 # Distancia en cm de la persona a la cámara para calibración
+        self._known_width = 16 # Ancho en cm del rostro de la persona para calibración
+        self._face_points = [33, 133, 362, 263] # Puntos clave de la cara (nariz, barbilla, ojos)
 
-    def distanceCalculator(x1, x2, y1, y2):
+    def _distanceCalculator(x1, x2, y1, y2):
         distance = math.hypot(x2 - x1, y2 - y1)
         return distance
 
     
     def facialDetectionStart(self):
         while True:
-            ret, frame = self.cap.read()
+            ret, frame = self._cap.read()
             frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            results = self.facialMesh.process(frameRGB)
+            results = self._facialMesh.process(frameRGB)
 
             lista = []
 
             if results.multi_face_landmarks:
 
                 for face in results.multi_face_landmarks:
-                    self.mpDraw.draw_landmarks(frame, face, self.mpFacialMesh.FACEMESH_CONTOURS, self.drawSettings, self.drawSettings)
+                    self._mpDraw.draw_landmarks(frame, face, self._mpFacialMesh.FACEMESH_CONTOURS, self._drawSettings, self._drawSettings)
 
                     height, width, c = frame.shape
 
@@ -54,7 +54,7 @@ class facialDetection():
 
                     if len(points) == len(face_points):
                         pixel_width = abs(points[0][0] - points[3][0])
-                        distance = (self.known_width * self.focal_length) / pixel_width
+                        distance = (self._known_width * self._focal_length) / pixel_width
                         #print(distance)
                         cv2.putText(frame, f"{distance:.2f} cm", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
@@ -160,9 +160,9 @@ class facialDetection():
             if k == 27:
                 break
 
-        self.cap.release()
+        self._cap.release()
         cv2.destroyAllWindows()
 
 
-main = facialDetection()
+main = facialDetection(1280, 720, 1)
 main.facialDetectionStart()
