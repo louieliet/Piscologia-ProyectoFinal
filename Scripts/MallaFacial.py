@@ -3,6 +3,8 @@ import mediapipe as mp
 import math
 import numpy as np
 
+
+
 def distanceCalculator(x1, x2, y1, y2):
     distance = math.hypot(x2 - x1, y2 - y1)
     return distance
