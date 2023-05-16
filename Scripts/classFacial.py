@@ -15,7 +15,7 @@ class facialDetection():
 
         #Almacenando la malla facial
         self._mpFacialMesh = mp.solutions.face_mesh
-        self._facialMesh = self._mpFacialMesh.FaceMesh(max_num_faces= 2)
+        self._facialMesh = self._mpFacialMesh.FaceMesh(max_num_faces= 1)
 
         # Constantes para la triangulación
         self._focal_length = 875 # Valor aproximado para la cámara de la laptop
