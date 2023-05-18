@@ -14,7 +14,7 @@ class MainApp(MDApp):
     def build(self):
         #self.theme_cls.theme_style='Dark'
         #self.theme_cls.primary_palette='Teal'
-        button=Button (background_normal='botones.png')
+        #button=Button (background_normal='botones.png')
         Builder.load_file('tutorial.kv')
         return Ui()
     def change_style(self,checked,value):
