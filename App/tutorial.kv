@@ -1,10 +1,48 @@
 #:kivy 1.0.9
+#import RiseTransition kivy.uix.screenmanager.RiseInTransition
+#impot SlideTransition kivy.uix.screenmanager.SlideTransition
+<ElementCard@MDCard>:
+    radius:'10dp'
+    spaciong: '10dp'
+    padding: '10dp'
+    image:''
+    text: ''
+    sub_text:''
+    orientation: 'horizontal'
+    ripple_behavior:True
+    on_release:
+        app.root.transition=RiseTransition()
+    image:root.image
+    MDBoxLayout:
+        orientation :'vertical'
+        MDLabel : 
+            text:root.text
+            halign: 'center'
+        #MDLabel:
+          #  sub_text:root.sub_text
+           # haling: 'center'
+
+
+<CustomizeScreen@MDBoxLayout>:
+    orientation ='horizontal'
+    text:''
+    padding:100
+    MDLable:
+        text: root.text
+        haling:'center'
+        post_hint:{'center_x':0.5}
+    MDFillRoundFlatButton:
+        text: '<-'
+        post_hint:{'center_x':0.5}
+        on_release: 
+            app.root.current='screen_principal'
+            app.root.transition= SlideTransition(direction='left')
 
 <Ui>:
     
     MDScreen:
         name : 'screen_principal'
-        md_bg_color: 0,0.5,0.5,1
+        md_bg_color:0.6,0.4,0.1#color fondo
         MDBoxLayout:
             orientation : 'vertical'
             MDBoxLayout:
@@ -12,23 +50,36 @@
                 orientation : 'horizontal'
                 paddind: '10dp'#margen 
             MDCard:
+               
                 radius:'10dp'
                 padding: '10dp'
-                line_color: 1,0,1,1
-            MDLabel:
-                text: 'Menu'
-                halign: 'center'
-                pos_hint: {'center_y':0.5}
-            MDSwitch:
-                pos_hint:{'center_y':0.5}
-               # on_active:
-                    #app.change_style(*args)
+                line_color: 0,0,0,0
+                MDLabel:
+                    text: 'MENU'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                MDSwitch:
+                    pos_hint:{'center_y': 0.5}
+                    on_active:
+                        app.change_style(*args)
 
 
             MDGridLayout:
-                cols: 3#columnas
+                
+                #cols: 3#columnas
+                rows:3
                 size_hint: 1,0.8
+                padding : ['10dp','10dp','10dp','10dp']
 
+                ElementCard:
+                    texto:'Recomendacion'
+                    imagen:'images/'
+                    on_release:
+                        root.current='screen1'
+    MDScreen:
+        name:'screen1'
+        CustomizeScreen:
+            text:'Pantalla '
 
 
     
