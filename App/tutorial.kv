@@ -1,18 +1,22 @@
-#:kivy 1.0.9
-#import RiseTransition kivy.uix.screenmanager.RiseInTransition
-#impot SlideTransition kivy.uix.screenmanager.SlideTransition
+#: kivy 1.0.9
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
 <ElementCard@MDCard>:
     radius:'10dp'
-    spaciong: '10dp'
+    spacing: '10dp'
     padding: '10dp'
     image:''
     text: ''
-    sub_text:''
+    #sub_text:''
     orientation: 'horizontal'
     ripple_behavior:True
     on_release:
-        app.root.transition=RiseTransition()
-    image:root.image
+        app.root.transition=RiseInTransition()
+    image:
+        #halign: 'right'
+        root.image
+        
+        
     MDBoxLayout:
         orientation :'vertical'
         MDLabel : 
@@ -20,20 +24,20 @@
             halign: 'center'
         #MDLabel:
           #  sub_text:root.sub_text
-           # haling: 'center'
+           # halign: 'center'
 
 
 <CustomizeScreen@MDBoxLayout>:
-    orientation ='horizontal'
+    orientation: 'horizontal'
     text:''
     padding:100
-    MDLable:
+    MDLabel:
         text: root.text
-        haling:'center'
-        post_hint:{'center_x':0.5}
+        halign:'center'
+        pos_hint:{'center_x':0.5}
     MDFillRoundFlatButton:
-        text: '<-'
-        post_hint:{'center_x':0.5}
+        text: 'Regresar'
+        pos_hint:{'center_x':0.5}
         on_release: 
             app.root.current='screen_principal'
             app.root.transition= SlideTransition(direction='left')
@@ -42,7 +46,7 @@
     
     MDScreen:
         name : 'screen_principal'
-        md_bg_color:0.6,0.4,0.1#color fondo
+        md_bg_color:0.9,0.8,0.6#color fondo
         MDBoxLayout:
             orientation : 'vertical'
             MDBoxLayout:
@@ -72,8 +76,8 @@
                 padding : ['10dp','10dp','10dp','10dp']
 
                 ElementCard:
-                    texto:'Recomendacion'
-                    imagen:'images/'
+                    text:'Recomendacion'
+                    image:'Source and Tools/psicoReconocimiento.jpeg'
                     on_release:
                         root.current='screen1'
     MDScreen:
