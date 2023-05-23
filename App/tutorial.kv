@@ -11,17 +11,18 @@
     orientation: 'horizontal'
     ripple_behavior:True
     on_release:
-        app.root.transition=RiseInTransition()
-    image:
-        #halign: 'right'
-        root.image
-        
+        app.root.transition = RiseInTransition()
+    Image:
+        source: root.image
+        halign: 'right'
         
     MDBoxLayout:
-        orientation :'vertical'
-        MDLabel : 
-            text:root.text
-            halign: 'center'
+        orientation: 'horizontal'
+        MDLabel:
+            text: root.text
+            halign:'center'
+           # pos_hint: {'center_y': 0.5}
+      
         #MDLabel:
           #  sub_text:root.sub_text
            # halign: 'center'
@@ -47,7 +48,7 @@
     MDScreen:
         name : 'screen_principal'
         md_bg_color:0.9,0.8,0.6#color fondo
-        MDBoxLayout:
+        MDBoxLayout:#distrubicion de cajitas
             orientation : 'vertical'
             MDBoxLayout:
                 size_hint: 1,0.2# tamaño x y
@@ -72,18 +73,37 @@
                 
                 #cols: 3#columnas
                 rows:3
-                size_hint: 1,0.8
-                padding : ['10dp','10dp','10dp','10dp']
-
+                size_hint: 1,2# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
                 ElementCard:
                     text:'Recomendacion'
-                    image:'Source and Tools/psicoReconocimiento.jpeg'
+                    image:'Sources and Tools/1.png'
                     on_release:
                         root.current='screen1'
+                ElementCard:
+                    text:'Cupones'
+                    image:'Sources and Tools/1.png'
+                    on_release:
+                        root.current='screen2'
+                ElementCard:
+                    text:'Cupones'
+                    image:'Sources and Tools/Screenshot_26.png'
+                    on_release:
+                        root.current='screen3'
+                
     MDScreen:
         name:'screen1'
         CustomizeScreen:
-            text:'Pantalla '
+            text:'Fashon Fainder '
+    MDScreen:
+        name:'screen2'
+        CustomizeScreen:
+            text:'Fashon Fainder '
+    MDScreen:
+        name:'screen3'
+        CustomizeScreen:
+            text:'Fashon Fainder '
 
 
     
