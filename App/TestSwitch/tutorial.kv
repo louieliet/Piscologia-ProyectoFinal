@@ -1,0 +1,140 @@
+#: kivy 1.0.9
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+<ElementCard@MDCard>:
+    radius:'10dp'
+    spacing: 0.7
+    padding: 0.2
+    #size_hint: None,None
+    #size: '750dp','120dp'
+    image:''
+    text:''
+    
+    orientation: 'horizontal'
+    ripple_behavior:True
+    md_bg_color: 0.96, 0.96, 0.86, 0.5 # Color beige
+
+    on_release:
+        app.root.transition = RiseInTransition()
+    Image:
+        source: root.image
+        halign: 'right'
+        
+    MDBoxLayout:
+        orientation: 'horizontal'
+        MDLabel:
+            text: root.text
+            halign:'center'
+            color: 0 , 0 ,0 , 1#letra
+
+
+<CustomizeScreen@MDBoxLayout>:
+    orientation: 'horizontal'
+    text:''
+    padding:100
+    
+    MDLabel:
+        text: root.text
+        halign:'center'
+        pos_hint:{'center_y':0.5}
+       
+        font_size: 30
+    MDFillRoundFlatButton:
+        text: 'Regresar'
+        pos_hint:{'center_x':0.5}
+        on_release: 
+            app.root.current='screen_principal'
+            app.root.transition= SlideTransition(direction='left')
+
+AppManager:
+    LoginApp:
+    Menu:
+    Recomendacion:
+    Cupones:
+
+
+<LoginApp>:
+    name: 'screen1'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Log In'
+        Button:
+            text: 'Ir a Pantalla 2'
+            on_release: app.root.current = 'menu'
+ 
+<Recomendacion>:
+    name:'Recomendacion'
+
+<Cupones>:
+    name:'Cupones'
+    CustomizeScreen:
+        text:'Cupones'
+
+<MiEstilo>:
+    name:'MiEstilo'
+<Catalogo>:
+    name:'Catalogo'
+
+
+<Menu>:
+    name: 'menu'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        MDBoxLayout:#distrubicion de cajitas
+            orientation : 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2# tamaño x y
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
+            #MDCard:Tarjeta del menu principal
+               
+                #radius:'10dp'
+                #padding: '10dp'
+                #line_color: 0,0,0,0
+                MDLabel:
+
+                    text: 'Menu principal'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    color: 0 , 0 , 0 , 1
+                    font_size: 30
+                    
+                #MDSwitch:
+                 #   pos_hint:{'center_y': 0.5}
+                   # on_active:
+                  #      app.change_style(*args)
+
+
+            MDGridLayout:
+                #cols: 3#columnas
+                rows:4
+                size_hint: 1,2# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
+
+                ElementCard:
+                    text:'Recomendacion'
+                    #sub_text:'foadsjofoiawhf'
+                    image:'Sources and Tools/1.png'
+                    on_release: app.root.current = 'Recomendacion'
+                    
+                ElementCard:
+                    text:'Cupones'
+                    image:'Sources and Tools/2.png'
+                    on_release: app.root.current = 'Cupones'
+                ElementCard:
+                    text:'Mi estilo'
+                    image:'Sources and Tools/3.png'
+                    on_release: app.root.current = 'MiEstilo'
+                ElementCard:
+                    text:'Catalogo'
+                    image:'Sources and Tools/4.png'
+                    on_release: app.root.current = 'Catalogo'
+                
+            
+
+
+
+
+    

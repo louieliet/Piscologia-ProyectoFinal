@@ -1,11 +1,25 @@
 
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-#---------Liz
 from kivymd.app import MDApp
-from kivy.uix.screenmanager import ScreenManager
+
 from kivy.lang import Builder
+
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.button import Button
+
+from kivy.core.window import Window
+
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.textfield import MDTextFieldRect
+
+class LoginApp(MDApp):
+    dialog = None #
+    def build(self):
+        self.theme_cls.theme_style = 'Dark'
+        return Builder.load_file('login.kv')
+
 
 class Ui(ScreenManager):
     pass
@@ -27,4 +41,4 @@ class MainApp(MDApp):
 
 
 if __name__ == "__main__":
-    MainApp().run()
+    LoginApp().run()
