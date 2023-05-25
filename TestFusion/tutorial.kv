@@ -54,14 +54,34 @@ AppManager:
 
 <LoginApp>:
     name: 'screen1'
-    BoxLayout:
-        orientation: 'vertical'
-        Label:
-            text: 'Log In'
-        Button:
-            text: 'Ir a Pantalla 2'
-            on_release: app.root.current = 'menu'
- 
+    Label:
+        text:'Inicio de sesión'
+    
+    TextInput:
+        id: sign_in_username
+        hint_text: 'Usuario: '
+    
+    TextInput:
+        id: sign_in_username
+        hint_text: 'Contaseña: '
+        password: True
+    
+    Button:
+        text: 'Iniciar sesión'
+        on_press: app.root.sign_in()
+    Label:
+        text:'Registro'
+    TextInput:
+        id: sign_up_username
+        hint_text: 'Nombre de usuario'
+    TextInput:
+        id: sign_up_password
+        hint_text: 'Contraseña'
+        password: True
+    Button:
+        text: 'Registrarse'
+        on_press: root.sign_up()
+
 <EmotionRecognition>:
     name:'EmotionRecognition'
 

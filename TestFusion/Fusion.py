@@ -205,12 +205,23 @@ class Menu(Screen):
     pass
 
 
+
 class EmotionRecognitionApp(MDApp):
     def build(self):
         self.theme_cls.theme_style='Dark'
         self.theme_cls.primary_palette='Teal'
         kv = Builder.load_file('tutorial.kv')
         return kv
+    
+    def sign_in(self):
+        username = self.ids.sign_in_username.text
+        password = self.ids.sign_in_password.text
+        #logic
+
+    def sign_up(self):
+        username = self.ids.sign_up_username.text
+        password = self.ids.sign_up_password.text
+        # Lógica para realizar el registro
     
     def change_style(self,checked,value):
         if value:
