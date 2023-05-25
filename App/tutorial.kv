@@ -6,7 +6,8 @@
     spacing: '10dp'
     padding: '10dp'
     image:''
-    text: ''
+    text:''
+    
     #sub_text:''
     orientation: 'horizontal'
     ripple_behavior:True
@@ -21,21 +22,26 @@
         MDLabel:
             text: root.text
             halign:'center'
+            color: 1 , 0 , 0 , 1
+
            # pos_hint: {'center_y': 0.5}
       
         #MDLabel:
-          #  sub_text:root.sub_text
-           # halign: 'center'
+         #   sub_text:root.sub_text
+          #  halign: 'center'
 
 
 <CustomizeScreen@MDBoxLayout>:
     orientation: 'horizontal'
     text:''
     padding:100
+    
     MDLabel:
         text: root.text
         halign:'center'
-        pos_hint:{'center_x':0.5}
+        pos_hint:{'center_y':0.5}
+       
+        font_size: 30
     MDFillRoundFlatButton:
         text: 'Regresar'
         pos_hint:{'center_x':0.5}
@@ -54,30 +60,35 @@
                 size_hint: 1,0.2# tamaño x y
                 orientation : 'horizontal'
                 paddind: '10dp'#margen 
-            MDCard:
+            #MDCard:Tarjeta del menu principal
                
-                radius:'10dp'
-                padding: '10dp'
-                line_color: 0,0,0,0
+                #radius:'10dp'
+                #padding: '10dp'
+                #line_color: 0,0,0,0
                 MDLabel:
-                    text: 'MENU'
+
+                    text: 'Menu principal'
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
-                MDSwitch:
-                    pos_hint:{'center_y': 0.5}
-                    on_active:
-                        app.change_style(*args)
+                    color: 0 , 0 , 0 , 1
+                    font_size: 30
+                    
+                #MDSwitch:
+                 #   pos_hint:{'center_y': 0.5}
+                   # on_active:
+                  #      app.change_style(*args)
 
 
             MDGridLayout:
                 
                 #cols: 3#columnas
-                rows:3
+                rows:4
                 size_hint: 1,2# tamño x, y
                 padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
                 spacing: '10dp'
                 ElementCard:
                     text:'Recomendacion'
+                    #sub_text:'foadsjofoiawhf'
                     image:'Sources and Tools/1.png'
                     on_release:
                         root.current='screen1'
@@ -87,21 +98,31 @@
                     on_release:
                         root.current='screen2'
                 ElementCard:
-                    text:'Cupones'
+                    text:'Mi estilo'
                     image:'Sources and Tools/Screenshot_26.png'
                     on_release:
                         root.current='screen3'
+                ElementCard:
+                    text:'Catalogo'
+                    image:'Sources and Tools/Screenshot_26.png'
+                    on_release:
+                        root.current='screen4'
                 
     MDScreen:
         name:'screen1'
         CustomizeScreen:
-            text:'Fashon Fainder '
+            text:'Escanea '
+            
     MDScreen:
         name:'screen2'
         CustomizeScreen:
-            text:'Fashon Fainder '
+            text:'Fashon Finder '
     MDScreen:
         name:'screen3'
+        CustomizeScreen:
+            text:'Fashon Finder '
+    MDScreen:
+        name:'screen4'
         CustomizeScreen:
             text:'Fashon Fainder '
 
