@@ -49,51 +49,24 @@
 AppManager:
     LoginApp:
     Menu:
-    Cupones:
-    EmotionRecognition:
+
 
 <LoginApp>:
-    name: 'screen1'
-    Label:
-        text:'Inicio de sesión'
-    
-    TextInput:
-        id: sign_in_username
-        hint_text: 'Usuario: '
-    
-    TextInput:
-        id: sign_in_username
-        hint_text: 'Contaseña: '
-        password: True
-    
-    Button:
-        text: 'Iniciar sesión'
-        on_press: app.root.sign_in()
-    Label:
-        text:'Registro'
-    TextInput:
-        id: sign_up_username
-        hint_text: 'Nombre de usuario'
-    TextInput:
-        id: sign_up_password
-        hint_text: 'Contraseña'
-        password: True
-    Button:
-        text: 'Registrarse'
-        on_press: root.sign_up()
-
-<EmotionRecognition>:
-    name:'EmotionRecognition'
-
-<Cupones>:
-    name:'Cupones'
-    CustomizeScreen:
-        text:'Cupones'
-
-<MiEstilo>:
-    name:'MiEstilo'
-<Catalogo>:
-    name:'Catalogo'
+    name: 'registerscreen'
+    BoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            text: 'Iniciar Sesión'
+        MDTextField:
+            id: sign_in_username
+            hint_text: 'Nombre de usuario'
+        MDTextField:
+            id: sign_in_password
+            hint_text: 'Contraseña'
+            password: True
+        MDRaisedButton:
+            text: 'Iniciar Sesión'
+            on_release: app.sign_in()
 
 
 <Menu>:
@@ -106,11 +79,7 @@ AppManager:
                 size_hint: 1,0.2# tamaño x y
                 orientation : 'horizontal'
                 paddind: '10dp'#margen 
-            #MDCard:Tarjeta del menu principal
-               
-                #radius:'10dp'
-                #padding: '10dp'
-                #line_color: 0,0,0,0
+
                 MDLabel:
 
                     text: 'Menu principal'
@@ -118,13 +87,7 @@ AppManager:
                     pos_hint: {'center_y': 0.5}
                     color: 0 , 0 , 0 , 1
                     font_size: 30
-                    
-                #MDSwitch:
-                 #   pos_hint:{'center_y': 0.5}
-                   # on_active:
-                  #      app.change_style(*args)
-
-
+                
             MDGridLayout:
                 #cols: 3#columnas
                 rows:4

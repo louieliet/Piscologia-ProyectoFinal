@@ -214,21 +214,22 @@ class EmotionRecognitionApp(MDApp):
         return kv
     
     def sign_in(self):
-        username = self.ids.sign_in_username.text
-        password = self.ids.sign_in_password.text
-        #logic
-
-    def sign_up(self):
-        username = self.ids.sign_up_username.text
-        password = self.ids.sign_up_password.text
-        # Lógica para realizar el registro
-    
-    def change_style(self,checked,value):
-        if value:
-            self.theme_cls.theme_style='Dark'
+        username = self.root.get_screen('registerscreen').ids.sign_in_username.text
+        password = self.root.get_screen('registerscreen').ids.sign_in_password.text
+        # Lógica para el inicio de sesión
+        if username == "admin" and password == "123":
+            # Iniciar sesión exitoso
+            self.root.current = 'menu'
         else:
-            self.theme_cls.theme_style='Ligth'
-
+            # Mostrar mensaje de error
+            dialog = MDDialog(
+                text="Credenciales inválidas. Inténtalo de nuevo.",
+                buttons=[
+                    MDFlatButton(text="Aceptar")
+                    
+                ]
+            )
+            dialog.open()
 
 if __name__ == '__main__':
     EmotionRecognitionApp().run()
