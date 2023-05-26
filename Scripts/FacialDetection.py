@@ -12,7 +12,7 @@ class EmotionRecognition:
 
         # Inicializar la cámara
         self.res = [1280, 720]
-        self.cap = cv2.VideoCapture(1)
+        self.cap = cv2.VideoCapture(0)
         self.cap.set(3, self.res[0])
         self.cap.set(4, self.res[1])
 
