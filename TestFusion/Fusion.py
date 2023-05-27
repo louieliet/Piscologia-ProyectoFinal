@@ -213,6 +213,7 @@ class EmotionRecognitionApp(MDApp):
         kv = Builder.load_file('tutorial.kv')
         return kv
     
+    
     def sign_in(self):
         username = self.root.get_screen('registerscreen').ids.sign_in_username.text
         password = self.root.get_screen('registerscreen').ids.sign_in_password.text

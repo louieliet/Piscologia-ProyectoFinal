@@ -16,9 +16,6 @@
 
     on_release:
         app.root.transition = RiseInTransition()
-    Image:
-        source: root.image
-        halign: 'right'
         
     MDBoxLayout:
         orientation: 'horizontal'
@@ -26,6 +23,9 @@
             text: root.text
             halign:'center'
             color: 0 , 0 ,0 , 1#letra
+    Image:
+        source: root.image
+        halign: 'left'
 
 
 <CustomizeScreen@MDBoxLayout>:
@@ -45,29 +45,51 @@
         on_release: 
             app.root.current='screen_principal'
             app.root.transition= SlideTransition(direction='left')
-
+#<Scroll@ScrollView>:
+ #   size_hint: 1,None
+  #  halign:self.minimun_height
 AppManager:
     LoginApp:
     Menu:
     EmotionRecognition:
+    Cupones:
+    MiEstilo:
+    Catalogo:
 
 
 <LoginApp>:
     name: 'registerscreen'
-    BoxLayout:
-        orientation: 'vertical'
-        MDLabel:
-            text: 'Iniciar Sesión'
-        MDTextField:
-            id: sign_in_username
-            hint_text: 'Nombre de usuario'
-        MDTextField:
-            id: sign_in_password
-            hint_text: 'Contraseña'
-            password: True
-        MDRaisedButton:
-            text: 'Iniciar Sesión'
-            on_release: app.sign_in()
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                text: 'FASHON FINDER'
+                halign:'center'
+               
+                post_hint:{'center_y':0.5,'center_x':0.1}
+                color: 0,0,0,1
+                font_size:30
+            MDLabel:
+                text:'Tu rostro es la clave para desbloquear el mundo de la moda'
+                halign:'center'
+                post_hint:{'center_y':0.5,'center_x':0.2}
+                color:0,0,0,1
+
+            MDTextField:
+                
+                id: sign_in_username
+                hint_text: 'Nombre de usuario'
+                color: 0,0,0,1
+            MDTextField:
+                
+                id: sign_in_password
+                hint_text: 'Contraseña'
+                password: True
+                color: 0,0,0,1
+            MDRaisedButton:
+                text: 'Iniciar Sesión'
+                on_release: app.sign_in()
 
 
 <Menu>:
@@ -117,6 +139,58 @@ AppManager:
                 
 <EmotionRecognition>
     name: 'EmotionRecognition'
+<Cupones>
+    name:'Cupones'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        MDBoxLayout:#distrubicion de cajitas
+            orientation : 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2# tamaño x y
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
+
+                MDLabel:
+
+                    text: 'Cupones'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    color: 0 , 0 , 0 , 1
+                    font_size: 30
+                
+            MDGridLayout:
+                #cols: 3#columnas
+                rows:4
+                
+                size_hint: 1,2# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
+
+                ElementCard:
+                    #text:''
+                    #sub_text:'foadsjofoiawhf'
+                    image:'Sources and Tools/1.png'
+                    on_release: app.root.current = 'Detalles'
+                    
+                ElementCard:
+                    #text:'Cupones'
+                    #image:'Sources and Tools/2.png'
+                    on_release: app.root.current = 'Detalles'
+                ElementCard:
+                    #text:'Mi estilo'
+                    #image:'Sources and Tools/3.png'
+                    on_release: app.root.current = 'Detalles'
+                ElementCard:
+                    #text:'Catalogo'
+                    #image:'Sources and Tools/4.png'
+                    on_release: app.root.current = 'Detallez'
+                
+
+
+<MiEstilo>
+    name: 'MiEstilo'
+<Catalogo>
+    name: 'Catalogo'
 
 
 
