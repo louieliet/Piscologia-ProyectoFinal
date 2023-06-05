@@ -26,6 +26,31 @@
     Image:
         source: root.image
         halign: 'left'
+<ElementCard2@MDCard>:
+    radius:'5dp'
+    spacing: 0.3
+    padding: 1
+    #size_hint: None,None
+    #size: '750dp','120dp'
+    image:''
+  
+    orientation: 'horizontal'
+    ripple_behavior:True
+    md_bg_color: 0.96, 0.96, 0.86, 0.5 # Color beige
+
+    on_release:
+        app.root.transition = RiseInTransition()
+        
+  
+    Image:
+        source: root.image
+        #size_hint_y: None
+        #height: self.width  # Iguala la altura a la anchura para que la imagen se muestre cuadrada
+        #allow_stretch: True
+        #keep_ratio: True
+        halign: 'center'
+       
+
 
 
 <CustomizeScreen@MDBoxLayout>:
@@ -147,8 +172,8 @@ AppManager:
             orientation : 'vertical'
             MDBoxLayout:
                 size_hint: 1,0.2# tamaño x y
-                orientation : 'horizontal'
-                paddind: '10dp'#margen 
+                orientation : 'horizontal'# de izquierda a derecha
+                paddind: '3dp'#margen 
 
                 MDLabel:
 
@@ -159,31 +184,23 @@ AppManager:
                     font_size: 30
                 
             MDGridLayout:
-                #cols: 3#columnas
-                rows:4
+                cols: 6#columnas
+                #rows:2
                 
                 size_hint: 1,2# tamño x, y
-                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                padding : ['10dp','10dp','6dp','10dp']#izquieda, abajo, derecha,arriba
                 spacing: '10dp'
-
-                ElementCard:
-                    #text:''
-                    #sub_text:'foadsjofoiawhf'
+                
+                ElementCard2:
                     image:'Sources and Tools/1.png'
-                    on_release: app.root.current = 'Detalles'
+                    size_hint: None, None
+                    size: '120dp', '120dp'
+                    pos_hint: {'center_x': 0.5}
+                ElementCard2:
+                    image:'Sources and Tools/1.png'
                     
-                ElementCard:
-                    #text:'Cupones'
-                    #image:'Sources and Tools/2.png'
-                    on_release: app.root.current = 'Detalles'
-                ElementCard:
-                    #text:'Mi estilo'
-                    #image:'Sources and Tools/3.png'
-                    on_release: app.root.current = 'Detalles'
-                ElementCard:
-                    #text:'Catalogo'
-                    #image:'Sources and Tools/4.png'
-                    on_release: app.root.current = 'Detallez'
+                
+               
                 
 
 
@@ -191,7 +208,45 @@ AppManager:
     name: 'MiEstilo'
 <Catalogo>
     name: 'Catalogo'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        MDBoxLayout:#distrubicion de cajitas
+            orientation : 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2# tamaño x y
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
 
+                MDLabel:
+
+                    text: 'Catalogo'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    color: 0 , 0 , 0 , 1
+                    font_size: 30
+                
+            MDGridLayout:
+                cols: 2#columnas
+                #rows:4
+                
+                size_hint: 1,.8# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
+
+                ElementCard2:
+                    image:'Sources and Tools/C2.png'
+                ElementCard2:
+                    image:'Sources and Tools/C3.png'
+                ElementCard2:
+                    image:'Sources and Tools/C4.png'
+                ElementCard2:
+                    image:'Sources and Tools/C6.png'
+                ElementCard2:
+                    image:'Sources and Tools/C7.png'
+                ElementCard2:
+                    image:'Sources and Tools/C5.png'
+ 
+ 
 
 
     
