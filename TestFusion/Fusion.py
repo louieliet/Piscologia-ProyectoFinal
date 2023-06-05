@@ -48,9 +48,8 @@ class EmotionRecognition(Screen):
 
 
     def apply_blur(self, frame):
-        image = PILImage.fromarray(frame)
-        blurred_image = image.filter(ImageFilter.GaussianBlur(radius=20))
-        return np.array(blurred_image)
+        blurred_frame = cv2.GaussianBlur(frame, (25, 25), 0)  # Ajusta los valores del tamaño del kernel según tus necesidades
+        return blurred_frame
     
     def distance_calculator(self, x1, x2, y1, y2):
         distance = math.hypot(x2 - x1, y2 - y1)
@@ -204,12 +203,12 @@ class EmotionRecognition(Screen):
                 # Aplicar el efecto de desenfoque utilizando Pillow
         
         
-        blurred_frame = self.apply_blur(frame_rgb)
+        blurred_frame = self.apply_blur(frame)
         
         # Mostrar el fotograma en la imagen de Kivy
         texture = Texture.create(size=(blurred_frame.shape[1], blurred_frame.shape[0]))
         texture.flip_vertical()
-        texture.blit_buffer(frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
+        texture.blit_buffer(blurred_frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
         self.image.texture = texture
 
     def on_stop(self):
