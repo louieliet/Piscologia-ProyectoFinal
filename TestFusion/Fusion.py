@@ -49,7 +49,7 @@ class EmotionRecognition(Screen):
 
     def apply_blur(self, frame):
         image = PILImage.fromarray(frame)
-        blurred_image = image.filter(ImageFilter.GaussianBlur(radius=10))
+        blurred_image = image.filter(ImageFilter.GaussianBlur(radius=20))
         return np.array(blurred_image)
     
     def distance_calculator(self, x1, x2, y1, y2):
