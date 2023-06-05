@@ -15,6 +15,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.button import Button
 from kivy.core.window import Window
+from kivy.utils import platform
+
 
 class EmotionRecognition(Screen):
     def __init__(self, **kwargs):
@@ -26,11 +28,7 @@ class EmotionRecognition(Screen):
         self.known_width = 16  # Ancho en cm del rostro de la persona para calibración
         self.face_points = [33, 133, 362, 263]  # Puntos clave de la cara (nariz, barbilla, ojos)
 
-        # Inicializar la cámara
-        self.res = [1280, 720]
         self.cap = cv2.VideoCapture(0)
-        self.cap.set(3, self.res[0])
-        self.cap.set(4, self.res[1])
 
         # Inicializar el reconocimiento facial
         self.mpDraw = mp.solutions.drawing_utils
@@ -51,6 +49,7 @@ class EmotionRecognition(Screen):
 
     def update_frame(self, dt):
         ret, frame = self.cap.read()
+        #frame = cv2.resize(frame, (410, 800))
         frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         results = self.facialMesh.process(frameRGB)
 
@@ -82,7 +81,7 @@ class EmotionRecognition(Screen):
                     lista.append([id, xo, yo])
                     cv2.putText(frame, str(id), (xo, yo), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1)
 
-                    if len(lista) == 468 and distance < 82:
+                    if len(lista) == 468 and distance < 82 and distance > 50:
                         # Felicidad
 
                         # Boca extremos
@@ -173,9 +172,13 @@ class EmotionRecognition(Screen):
                             emotion = "Sorprendido"
                             cv2.putText(frame, str(emotion), (500, 500), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 0), 10)
 
+                    '''
                     if distance > 82:
-                        cv2.putText(frame, "No se puede detectar", (480, 80), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 1)
-
+                        print("No se puede detectar")
+                    elif distance < 50:
+                        print("No se puede detectar")
+                    ''' 
+   
         # Mostrar el fotograma en la imagen de Kivy
         texture = Texture.create(size=(frame.shape[1], frame.shape[0]))
         texture.flip_vertical()
@@ -205,14 +208,13 @@ class Menu(Screen):
     pass
 
 
-
 class EmotionRecognitionApp(MDApp):
     def build(self):
+        kv = Builder.load_file('tutorial.kv')
+        #Window.size = (410, 800)
         self.theme_cls.theme_style='Dark'
         self.theme_cls.primary_palette='Teal'
-        kv = Builder.load_file('tutorial.kv')
         return kv
-    
     
     def sign_in(self):
         username = self.root.get_screen('registerscreen').ids.sign_in_username.text
