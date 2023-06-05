@@ -15,8 +15,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.button import Button
 from kivy.core.window import Window
-from kivy.utils import platform
-
 
 class EmotionRecognition(Screen):
     def __init__(self, **kwargs):
@@ -42,16 +40,28 @@ class EmotionRecognition(Screen):
 
         # Programar la actualización del fotograma
         Clock.schedule_interval(self.update_frame, 1.0 / 60.0)
+
     
     def distance_calculator(self, x1, x2, y1, y2):
         distance = math.hypot(x2 - x1, y2 - y1)
         return distance
+    
+    def evaluate_emotions(self, emotions, distance):
+        
+        distancia_referencia = 90
+        distancia_actual = distance
+        relacion_escala = distancia_actual / distancia_referencia
+        distancias_normalizadas = [distancia * relacion_escala for distancia in emotions]
+        suma = 0
+        for numero in distancias_normalizadas:
+            suma += numero
+        promedio = suma / len(distancias_normalizadas)
+        return promedio
 
     def update_frame(self, dt):
         ret, frame = self.cap.read()
-        #frame = cv2.resize(frame, (410, 800))
-        frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        results = self.facialMesh.process(frameRGB)
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = self.facialMesh.process(frame_rgb)
 
         lista = []
 
@@ -81,7 +91,11 @@ class EmotionRecognition(Screen):
                     lista.append([id, xo, yo])
                     cv2.putText(frame, str(id), (xo, yo), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1)
 
-                    if len(lista) == 468 and distance < 82 and distance > 50:
+                    if len(lista) == 468 and distance < 104 and distance > 80:
+                        
+                        emotions = []
+                        emotion = ''
+
                         # Felicidad
 
                         # Boca extremos
@@ -152,33 +166,33 @@ class EmotionRecognition(Screen):
 
                         distanciaPataGallo2 = (distanciaPataGalloIzq2 + distanciaPataGalloDer2) / 2
 
-                        if (
-                                distanciaBocaExtremo > 120.0 and
-                                distanciaBocaApertura > 23.0 and
-                                distanciaCejas > 30.0 and
-                                distanciaMejillas < 34.0 and
-                                distanciaPataGallo < 12.0 and
-                                distanciaPataGallo2 < 35.0):
+                        emotions.append(distanciaBocaExtremo)
+                        emotions.append(distanciaBocaApertura)
+                        emotions.append(distanciaCejas)
+                        emotions.append(distanciaMejillas)
+                        emotions.append(distanciaPataGallo)
+                        emotions.append(distanciaPataGallo2)
+
+                        promedio = self.evaluate_emotions(emotions, distance)
+
+                        print(promedio)
+
+                        if promedio > 30 and promedio < 34:
+                            emotion = "Normal"
+                        elif promedio > 36 and promedio < 37.8:
                             emotion = "Feliz"
-                            cv2.putText(frame, str(emotion), (500, 500), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 0), 10)
-
-                        elif (
-                                distanciaCejas < 20.0):
-                            emotion = "Enojado"
-                            cv2.putText(frame, str(emotion), (500, 500), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 0), 10)
-                        elif (
-                            distanciaBocaApertura > 30.0
-                        ):
+                        elif promedio > 38.4 and promedio < 42:
                             emotion = "Sorprendido"
-                            cv2.putText(frame, str(emotion), (500, 500), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 0), 10)
 
-                    '''
-                    if distance > 82:
-                        print("No se puede detectar")
-                    elif distance < 50:
-                        print("No se puede detectar")
-                    ''' 
-   
+                        # Mostrar la emoción en el centro de la pantalla
+                        text_size, _ = cv2.getTextSize(emotion, cv2.FONT_HERSHEY_SIMPLEX, 5, 10)
+                        text_x = int((width - text_size[0]) / 2)
+                        text_y = int((height - text_size[1]) / 2)
+                        cv2.putText(frame, emotion, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 0), 10)
+        
+
+                # Aplicar el efecto de desenfoque utilizando Pillow
+        
         # Mostrar el fotograma en la imagen de Kivy
         texture = Texture.create(size=(frame.shape[1], frame.shape[0]))
         texture.flip_vertical()
