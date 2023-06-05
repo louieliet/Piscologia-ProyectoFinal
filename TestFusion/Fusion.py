@@ -20,6 +20,10 @@ from PIL import Image as PILImage
 from PIL import ImageFilter
 import io
 from kivy.graphics.texture import Texture
+from kivymd.uix.controllers import WindowController
+from kivymd.uix.screen import MDScreen
+from kivy.core.window import Window
+from kivy.config import Config
 
 class EmotionRecognition(Screen):
     def __init__(self, **kwargs):
@@ -204,12 +208,14 @@ class EmotionRecognition(Screen):
         
         
         blurred_frame = self.apply_blur(frame)
-        
+
         # Mostrar el fotograma en la imagen de Kivy
         texture = Texture.create(size=(blurred_frame.shape[1], blurred_frame.shape[0]))
         texture.flip_vertical()
         texture.blit_buffer(blurred_frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
         self.image.texture = texture
+
+
 
     def on_stop(self):
         self.cap.release()
@@ -236,8 +242,12 @@ class Menu(Screen):
 
 class EmotionRecognitionApp(MDApp):
     def build(self):
+        # Establecer el tamaño fijo de la ventana
+        Window.top = 0
+        Window.size = (400, 800)
+        Window.borderless = True
+        Window.fullscreen = False
         kv = Builder.load_file('tutorial.kv')
-        #Window.size = (410, 800)
         self.theme_cls.theme_style='Dark'
         self.theme_cls.primary_palette='Teal'
         return kv
