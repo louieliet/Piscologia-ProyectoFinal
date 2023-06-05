@@ -238,7 +238,14 @@ class LoginApp(Screen):
 
 class Menu(Screen):
     pass
-
+class Cupon1(Screen):
+    pass
+class Cupon2(Screen):
+    pass
+class Cupon3(Screen):
+    pass
+class Cupon4(Screen):
+    pass
 
 class EmotionRecognitionApp(MDApp):
     def build(self):
