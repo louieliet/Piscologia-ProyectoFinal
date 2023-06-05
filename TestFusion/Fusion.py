@@ -44,7 +44,7 @@ class EmotionRecognition(Screen):
         self.facialMesh = self.mpFacialMesh.FaceMesh(max_num_faces=1)
 
         # Crear una instancia de la imagen para mostrar el fotograma capturado
-        self.image = Image()
+        self.image = Image(allow_stretch=True, keep_ratio=False)
         self.add_widget(self.image)
 
         # Programar la actualización del fotograma
@@ -206,7 +206,7 @@ class EmotionRecognition(Screen):
 
                 # Aplicar el efecto de desenfoque utilizando Pillow
         
-        
+
         blurred_frame = self.apply_blur(frame)
 
         # Mostrar el fotograma en la imagen de Kivy
