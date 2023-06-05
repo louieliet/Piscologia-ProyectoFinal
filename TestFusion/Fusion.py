@@ -15,6 +15,11 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.button import Button
 from kivy.core.window import Window
+import numpy as np
+from PIL import Image as PILImage
+from PIL import ImageFilter
+import io
+from kivy.graphics.texture import Texture
 
 class EmotionRecognition(Screen):
     def __init__(self, **kwargs):
@@ -41,6 +46,11 @@ class EmotionRecognition(Screen):
         # Programar la actualización del fotograma
         Clock.schedule_interval(self.update_frame, 1.0 / 60.0)
 
+
+    def apply_blur(self, frame):
+        image = PILImage.fromarray(frame)
+        blurred_image = image.filter(ImageFilter.GaussianBlur(radius=10))
+        return np.array(blurred_image)
     
     def distance_calculator(self, x1, x2, y1, y2):
         distance = math.hypot(x2 - x1, y2 - y1)
@@ -193,8 +203,11 @@ class EmotionRecognition(Screen):
 
                 # Aplicar el efecto de desenfoque utilizando Pillow
         
+        
+        blurred_frame = self.apply_blur(frame_rgb)
+        
         # Mostrar el fotograma en la imagen de Kivy
-        texture = Texture.create(size=(frame.shape[1], frame.shape[0]))
+        texture = Texture.create(size=(blurred_frame.shape[1], blurred_frame.shape[0]))
         texture.flip_vertical()
         texture.blit_buffer(frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
         self.image.texture = texture
