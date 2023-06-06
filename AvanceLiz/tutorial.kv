@@ -1,0 +1,312 @@
+#: kivy 1.0.9
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+<ElementCard@MDCard>:
+    radius:'10dp'
+    spacing: 0.7
+    padding: 0.2
+    #size_hint: None,None
+    #size: '750dp','120dp'
+    image:''
+    text:''
+    sub_text: ''
+    
+    orientation: 'horizontal'
+    ripple_behavior:True
+    md_bg_color: 0.96, 0.96, 0.86, 0.5 # Color beige
+
+    on_release:
+        app.root.transition = RiseInTransition()
+        
+    MDBoxLayout:
+        orientation: 'horizontal'
+        MDLabel:
+            text: root.text
+            halign:'center'
+            theme_text_color: "Custom"
+            font_size:18
+            
+        MDLabel:
+            sub_text:root.sub_text
+            halign:'center'
+            font_size:2
+            
+            text_color: 0 , 0 ,0 , 1#letra
+    Image:
+        source: root.image
+        halign: 'left'
+<ElementCard2@MDCard>:
+    radius:'5dp'
+    spacing: 0.3
+    padding: 1
+    #size_hint: None,None
+    #size: '750dp','120dp'
+    image:''
+  
+    orientation: 'horizontal'
+    ripple_behavior:True
+    md_bg_color: 0.96, 0.96, 0.86, 0.5 # Color beige
+
+    on_release:
+        app.root.transition = RiseInTransition()
+        
+  
+    Image:
+        source: root.image
+        #size_hint_y: None
+        #height: self.width  # Iguala la altura a la anchura para que la imagen se muestre cuadrada
+        #allow_stretch: True
+        #keep_ratio: True
+        halign: 'center'
+       
+
+
+
+<CustomizeScreen@MDBoxLayout>:
+    orientation: 'horizontal'
+    text:''
+    padding:100
+    
+    MDLabel:
+        text: root.text
+        halign:'center'
+        pos_hint:{'center_y':0.5}
+        
+       
+        font_size: 30
+    MDFillRoundFlatButton:
+        text: 'Regresar'
+        pos_hint:{'center_x':0.5}
+        on_release: 
+            app.root.current='screen_principal'
+            app.root.transition= SlideTransition(direction='left')
+#<Scroll@ScrollView>:
+ #   size_hint: 1,None
+  #  halign:self.minimun_height
+AppManager:
+    LoginApp:
+    Menu:
+    EmotionRecognition:
+    Cupones:
+    MiEstilo:
+    Catalogo:
+    Cupon1:
+    Cupon2:
+    Cupon3:
+    Cupon4:
+
+
+<LoginApp>:
+    name: 'registerscreen'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6
+        MDBoxLayout:
+            orientation: 'vertical'
+            MDLabel:
+                theme_text_color: "Custom"
+            
+                text_color: 0,0,0,1
+                text: 'FASHON FINDER'
+                halign:'center'
+               
+                post_hint:{'center_y':0.5,'center_x':0.1}
+                
+                font_size:30
+            MDLabel:
+                text:'Tu rostro es la clave para desbloquear el mundo de la moda'
+                halign:'center'
+                post_hint:{'center_y':0.5,'center_x':0.2}
+                theme_text_color: "Custom"
+                text_color:0,0,0,1
+
+            MDTextField:
+                
+                id: sign_in_username
+                hint_text: 'Nombre de usuario'
+                theme_text_color: "Custom"
+                text_color: 0,0,0,1
+            MDTextField:
+                
+                id: sign_in_password
+                hint_text: 'Contraseña'
+                password: True
+                theme_text_color: "Custom"
+                text_color: 0,0,0,1
+            MDRaisedButton:
+                text: 'Iniciar Sesión'
+                on_release: app.sign_in()
+
+
+<Menu>:
+    name: 'menu'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        MDBoxLayout:#distrubicion de cajitas
+            orientation : 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2# tamaño x y
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
+
+                MDLabel:
+
+                    text: 'Menu principal'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0 , 0 , 0 , 1
+                    font_size: 30
+                
+            MDGridLayout:
+                #cols: 3#columnas
+                rows:4
+                size_hint: 1,2# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
+
+                ElementCard:
+                    text:'Recomendacion'
+                    #sub_text:'foadsjofoiawhf'
+                    image:'Sources and Tools/1.png'
+                    on_release: app.root.current = 'EmotionRecognition'
+                    
+                ElementCard:
+                    text:'Cupones'
+                    image:'Sources and Tools/2.png'
+                    on_release: app.root.current = 'Cupones'
+                ElementCard:
+                    text:'Mi estilo'
+                    image:'Sources and Tools/3.png'
+                    on_release: app.root.current = 'MiEstilo'
+                ElementCard:
+                    text:'Catalogo'
+                    image:'Sources and Tools/4.png'
+                    on_release: app.root.current = 'Catalogo'
+                
+<EmotionRecognition>
+    name: 'EmotionRecognition'
+    MDLabel:
+        text: 'Hola'
+<Cupones>
+    name:'Cupones'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        MDBoxLayout:#distrubicion de cajitas
+            orientation : 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2# tamaño x y
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
+
+                MDLabel:
+
+                    text: 'Menu principal'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0 , 0 , 0 , 1
+                    font_size: 30
+                
+                
+            MDGridLayout:
+                #cols: 3#columnas
+                rows:4
+                size_hint: 1,2# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
+
+                ElementCard:
+                    text:'Detalles del cupon'
+                    sub_text: 'Solo disponible en tienda'
+                    image: 'Sources and Tools/Cupon1.png'
+                    on_release: app.root.current = 'Cupon1'
+                    
+                ElementCard:
+                    text:'Detalles del cupon'
+                    image:'Sources and Tools/Cupon2.png'
+                    on_release: app.root.current = 'Cupon2'
+                ElementCard:
+                    text:'Detalles del cupon'
+                    image:'Sources and Tools/Cupon3.png'
+                    on_release: app.root.current = 'Cupon3'
+                ElementCard:
+                    text:'Detalles del cupon'
+                    image:'Sources and Tools/Cupon4.png'
+                    on_release: app.root.current = 'Cupon4'
+<Cupon1>
+    name: 'Cupon1'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon1.png' 
+        MDLabel:
+            text: 'Solo valido para departamento de ropa'
+            halign:'center'
+           
+            theme_text_color: "Custom"
+            font_size:18              
+                
+<Cupon2>
+    name: 'Cupon2'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon2.png'     
+<Cupon3>
+    name: 'Cupon3'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon3.png'     
+<Cupon4>
+    name: 'Cupon4'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon4.png'     
+
+
+
+<MiEstilo>
+    name: 'MiEstilo'
+<Catalogo>
+    name: 'Catalogo'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        MDBoxLayout:#distrubicion de cajitas
+            orientation : 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2# tamaño x y
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
+
+                MDLabel:
+
+                    text: 'Catalogo'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    theme_text_color: "Custom"
+                
+                    color: 0 , 0, 0 , 1
+                    font_size: 30
+                
+            MDGridLayout:
+                cols: 2#columnas
+                #rows:4
+                
+                size_hint: 1,2.5# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
+
+                ElementCard2:
+                    image:'Sources and Tools/C2.png'
+                ElementCard2:
+                    image:'Sources and Tools/C3.png'
+                ElementCard2:
+                    image:'Sources and Tools/C4.png'
+                ElementCard2:
+                    image:'Sources and Tools/C6.png'
+                ElementCard2:
+                    image:'Sources and Tools/C7.png'
+                ElementCard2:
+                    image:'Sources and Tools/C5.png'
