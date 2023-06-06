@@ -189,9 +189,9 @@ class EmotionRecognition(Screen):
 
                         print(promedio)
 
-                        if promedio > 27.3 and promedio < 30:
+                        if promedio > 27.3 and promedio < 31:
                             emotion = "Normal"
-                        elif promedio > 30 and promedio < 33:
+                        elif promedio > 32 and promedio < 33:
                             emotion = "Disgusto"
                         elif promedio > 34.6 and promedio < 37.8:
                             emotion = "Feliz"
