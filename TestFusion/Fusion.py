@@ -44,7 +44,7 @@ class EmotionRecognition(Screen):
         self.facialMesh = self.mpFacialMesh.FaceMesh(max_num_faces=1)
 
         # Crear una instancia de la imagen para mostrar el fotograma capturado
-        self.image = Image(allow_stretch=True, keep_ratio=False)
+        self.image = Image()
         self.add_widget(self.image)
 
         # Programar la actualización del fotograma
@@ -60,7 +60,6 @@ class EmotionRecognition(Screen):
         return distance
     
     def evaluate_emotions(self, emotions, distance):
-        
         distancia_referencia = 90
         distancia_actual = distance
         relacion_escala = distancia_actual / distancia_referencia
@@ -190,11 +189,11 @@ class EmotionRecognition(Screen):
 
                         print(promedio)
 
-                        if promedio > 30 and promedio < 34:
+                        if promedio > 27.3 and promedio < 34.2:
                             emotion = "Normal"
-                        elif promedio > 36 and promedio < 37.8:
+                        elif promedio > 34.6 and promedio < 37.8:
                             emotion = "Feliz"
-                        elif promedio > 38.4 and promedio < 42:
+                        elif promedio > 38 and promedio < 42:
                             emotion = "Sorprendido"
 
                         # Mostrar la emoción en el centro de la pantalla
@@ -204,18 +203,13 @@ class EmotionRecognition(Screen):
                         cv2.putText(frame, emotion, (text_x, text_y), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 0), 10)
         
 
-                # Aplicar el efecto de desenfoque utilizando Pillow
-        
-
         blurred_frame = self.apply_blur(frame)
 
         # Mostrar el fotograma en la imagen de Kivy
-        texture = Texture.create(size=(blurred_frame.shape[1], blurred_frame.shape[0]))
+        texture = Texture.create(size=(frame.shape[1], frame.shape[0]))
         texture.flip_vertical()
-        texture.blit_buffer(blurred_frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
+        texture.blit_buffer(frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
         self.image.texture = texture
-
-
 
     def on_stop(self):
         self.cap.release()
