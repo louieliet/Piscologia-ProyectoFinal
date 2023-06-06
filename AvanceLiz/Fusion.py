@@ -220,6 +220,8 @@ class AppManager(ScreenManager):
 
 class Cupones(Screen):
     pass
+class Inicio(Screen):
+    pass
 
 class MiEstilo(Screen):
     pass
