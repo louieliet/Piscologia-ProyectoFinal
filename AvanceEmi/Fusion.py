@@ -25,7 +25,7 @@ from kivymd.uix.screen import MDScreen
 from kivy.core.window import Window
 from kivy.config import Config
 from collections import Counter
-
+from kivy.uix.label import Label
 class EmotionRecognition(Screen):
     def __init__(self, **kwargs):
         super(EmotionRecognition, self).__init__(**kwargs)
@@ -49,6 +49,11 @@ class EmotionRecognition(Screen):
         # Crear una instancia de la imagen para mostrar el fotograma capturado
         self.image = Image()
         self.add_widget(self.image)
+
+
+
+        self.label = Label(text='No se puede detectar', font_size=20)
+        self.add_widget(self.label)
 
         # Programar la actualización del fotograma
         Clock.schedule_interval(self.update_frame, 1.0 / 60.0)
@@ -80,6 +85,7 @@ class EmotionRecognition(Screen):
 
         lista = []
 
+
         if results.multi_face_landmarks:
             for face in results.multi_face_landmarks:
                 self.mpDraw.draw_landmarks(frame, face, self.mpFacialMesh.FACEMESH_CONTOURS, self.drawSettings,
@@ -107,7 +113,9 @@ class EmotionRecognition(Screen):
                     cv2.putText(frame, str(id), (xo, yo), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1)
 
                     if len(lista) == 468 and distance < 104 and distance > 80:
-                        
+
+                        self.label.text = 'Detección de emociones'
+
                         emotions = []
                         emotion = ''
 
@@ -206,7 +214,15 @@ class EmotionRecognition(Screen):
                             emotion = "Sorprendido"
                             self.registered_emotions.append("Sorprendido")
                         
+                        print(emotion)
+                    
+                    elif distance > 104 or distance < 80:
+                          self.label.text = 'No se puede detectar'
+
+
         blurred_frame = self.apply_blur(frame)
+
+
 
         # Mostrar el fotograma en la imagen de Kivy
         texture = Texture.create(size=(blurred_frame.shape[1], blurred_frame.shape[0]))
@@ -250,12 +266,13 @@ class Cupon3(Screen):
     pass
 class Cupon4(Screen):
     pass
-class testResult(Screen):
+class TestResult(Screen):
     pass
+
 
 class EmotionRecognitionApp(MDApp):
     next_button_count = 0
-    image_paths = ['Sources and Tools/C2.png', 'Sources and Tools/C3.png', 'Sources and Tools/C4.jpg']
+    image_paths = ['Sources and Tools/C2.png', 'Sources and Tools/C3.png', 'Sources and Tools/C4.png']
     emotion_data = []
     
     def build(self):
@@ -288,10 +305,11 @@ class EmotionRecognitionApp(MDApp):
             dialog.open()
 
     def passImage_emotion(self):
+        screen = self.root.get_screen('EmotionRecognition')
         self.next_button_count += 1
         if self.next_button_count <= len(self.image_paths):
-            screen = self.root.get_screen('EmotionRecognition')
             emotion_mode = screen.get_emotionmode()
+
             image_path = self.image_paths[self.next_button_count - 1]
 
             data = {'emotion_mode': emotion_mode, 'image_path': image_path}
@@ -305,10 +323,15 @@ class EmotionRecognitionApp(MDApp):
 
     
     def show_emotionResult(self):
-        happy_values = [data['emotion_mode'] for data in self.emotion_data if data['emotion_mode'] == 'Feliz']
-        testResult = self.root.get_screen('testResult')
-        testResult.ids.testResult_label.text = '\n'.join(happy_values)
-        self.root.current = 'testResult'
+        emotion_mode_search = 'Feliz'
+        for data in self.emotion_data:
+            if data['emotion_mode'] == emotion_mode_search:
+                image_path = data['image_path']
+                print("El image_path para emotion_mode 'Feliz' es:", image_path)
+
+        #testResult_screen = self.root.get_screen('testResult')
+        #testResult_screen.ids.testResult_label.text = 
+
 
 
 
