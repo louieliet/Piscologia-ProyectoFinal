@@ -22,19 +22,25 @@
         orientation: 'horizontal'
         MDLabel:
             text: root.text
+            font_name: 'fonts/DellaRespira-Regular.ttf'
             halign:'center'
             theme_text_color: "Custom"
-            font_size:18
+            font_size: '18sp'
+            valign: 'center'
             
         MDLabel:
-            text:root.sub_text
+            text: root.sub_text
+            font_name: 'fonts/DellaRespira-Regular.ttf'
             halign:'center'
-            font_size:2
-            
-            text_color: 0 , 0 ,0 , 1#letra
+            font_size: '12sp'
+            text_color: 0, 0, 0, 1  # Color de letra
+            valign: 'center'
     Image:
         source: root.image
         halign: 'left'
+        size_hint_x: 0.3  # Ajustar este valor para cambiar el tamaño de la imagen
+
+
 <ElementCard2@MDCard>:
     radius:'5dp'
     spacing: 0.3
@@ -80,9 +86,15 @@
         on_release: 
             app.root.current='screen_principal'
             app.root.transition= SlideTransition(direction='left')
-#<Scroll@ScrollView>:
- #   size_hint: 1,None
-  #  halign:self.minimun_height
+
+
+<MDTextField>:
+    hint_text_color: 0, 0, 0, 1  # Color del texto de sugerencia
+    color_active: 0, 0, 0, 1  # Color del texto cuando el campo está activo
+    line_color_focus: 0, 0, 0, 1  # Color de la línea cuando el campo está activo
+    line_color_normal: 0, 0, 0, 1  # Color de la línea cuando el campo no está activo
+
+
 AppManager:
     Inicio:
     LoginApp:
@@ -109,28 +121,27 @@ AppManager:
                 size: self.size
                 source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
 
-        MDBoxLayout:#distrubicion de cajitas
-            orientation : 'vertical'
+        MDBoxLayout:
+            orientation: 'vertical'
+
             MDBoxLayout:
-                size_hint: 1,0.2# tamaño x y
-                orientation : 'horizontal'
-                paddind: '10dp'#margen 
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'  # Corregir la propiedad de padding
 
                 MDLabel:
-                    text: 'Bienvenido'
+                    text: '- Bienvenido -'
                     font_name: 'fonts/DellaRespira-Regular.ttf'
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
                     theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
+                    text_color: 0, 0, 0, 1
                     font_size: 30
-                
-                
+
             MDGridLayout:
-                #cols: 3#columnas
-                rows:4
-                size_hint: 1,2# tamño x, y
-                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                rows: 4
+                size_hint: 1, 2
+                padding: ['10dp', '10dp', '10dp', '10dp']
                 spacing: '10dp'
 
                 MDCard:
@@ -138,7 +149,7 @@ AppManager:
                     BoxLayout:
                         canvas.before:
                             Color:
-                                rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+                                rgba: (0.9, 0.8, 0.6, 1)
                             Rectangle:
                                 pos: self.pos
                                 size: self.size
@@ -151,27 +162,27 @@ AppManager:
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
                     theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
+                    text_color: 0, 0, 0, 1
                     font_size: 30
+                    
                 MDLabel:
-                    text: 'Tu estilo, en un escaneo'
+                    text: ' Tu estilo, en un escaneo'
                     font_name: 'fonts/DellaRespira-Regular.ttf'
                     halign: 'center'
                     theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
+                    text_color: 0, 0, 0, 1
                     font_size: 30
                 
                 MDFillRoundFlatButton:
                     text: 'Login'
                     theme_text_color: "Custom"
                     font_name: 'fonts/DellaRespira-Regular.ttf'
-                    text_color: 0 , 0 , 0 , 1
-                    md_bg_color:  0.66, 0.66, 0.56, 0.5
-
-                    #pos_hint:{'center_x':0.5}
+                    text_color: 0, 0, 0, 1
+                    md_bg_color: 0.66, 0.66, 0.56, 0.5
                     on_release: 
-                        app.root.current='registerscreen'
-                        app.root.transition= SlideTransition(direction='right')
+                        app.root.current = 'registerscreen'
+                        app.root.transition = SlideTransition(direction='right')
+
                 
 
 <LoginApp>:
@@ -205,24 +216,26 @@ AppManager:
             MDLabel:
                 theme_text_color: "Custom"
                 text_color: 0, 0, 0, 1
-                text: 'Tu rostro es la clave para desbloquear el mundo de la moda'
+                text: ' - Tu rostro es la clave para desbloquear el mundo de la moda -'
                 halign: 'center'
                 font_name: 'fonts/DellaRespira-Regular.ttf'
                 font_size: '16sp'
 
+
             MDTextField:
                 id: sign_in_username
-                hint_text: 'Nombre de usuario'
+                hint_text: ' > Nombre de usuario'
                 font_name: 'fonts/DellaRespira-Regular.ttf'
-                theme_text_color: "Custom"
-                text_color: 0, 0, 0, 1
+                line_color_normal: 0, 0, 0, 1
+                text_color: 0, 0, 0, 11
 
             MDTextField:
                 id: sign_in_password
-                hint_text: 'Contraseña'
+                hint_text: ' > Contraseña'
                 font_name: 'fonts/DellaRespira-Regular.ttf'
                 password: True
-                theme_text_color: "Custom"
+                line_color_normal: 0, 0, 0, 1
+                line_color_focus: 0, 0, 0, 1
                 text_color: 0, 0, 0, 1
 
             MDFillRoundFlatButton:
@@ -234,165 +247,407 @@ AppManager:
                 font_size: '16sp'
                 on_release: app.sign_in()
 
-
-
-
 <Menu>:
     name: 'menu'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
-        MDBoxLayout:#distrubicion de cajitas
-            orientation : 'vertical'
+        canvas.before:
+            Color:
+                rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
+        MDBoxLayout:
+            orientation: 'vertical'
             MDBoxLayout:
-                size_hint: 1,0.2# tamaño x y
-                orientation : 'horizontal'
-                paddind: '10dp'#margen 
-
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
                 MDLabel:
-
-                    text: 'Menu principal'
+                    text: '- Menu principal -'
+                    font_name: 'fonts/DellaRespira-Regular.ttf'
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
                     theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
-                    font_size: 30
-                
+                    text_color: 0, 0, 0, 1
+                    font_size: '30sp'
+
             MDGridLayout:
-                #cols: 3#columnas
-                rows:4
-                size_hint: 1,2# tamño x, y
-                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                rows: 4
+                size_hint: 1, 2
+                padding: '10dp'
                 spacing: '10dp'
 
                 ElementCard:
-                    text:'Recomendacion'
-                    #sub_text:'foadsjofoiawhf'
-                    image:'Sources and Tools/1.png'
+                    text: 'Recomendaciones'
+                    image: 'Sources and Tools/1.png'
                     on_release: app.root.current = 'PreEmotionRecognition'
-                    
+
                 ElementCard:
-                    text:'Cupones'
-                    image:'Sources and Tools/2.png'
+                    text: 'Cupones'
+                    image: 'Sources and Tools/2.png'
                     on_release: app.root.current = 'Cupones'
+
                 ElementCard:
-                    text:'Mi estilo'
-                    image:'Sources and Tools/3.png'
+                    text: 'Mi estilo'
+                    image: 'Sources and Tools/3.png'
                     on_release: app.root.current = 'MiEstilo'
+
                 ElementCard:
-                    text:'Catalogo'
-                    image:'Sources and Tools/4.png'
+                    text: 'Catálogo'
+                    image: 'Sources and Tools/4.png'
                     on_release: app.root.current = 'Catalogo'
 
-<PreEmotionRecognition>
+
+<PreEmotionRecognition>:
     name: 'PreEmotionRecognition'
-    MDLabel:
-        id: emotion_label
-        text: 'Nuestras recomendaciones para ti:'
-        theme_text_color: "Custom"
-        color: 1, 1, 1, 1
-    MDRaisedButton:
-        text: 'Siguiente'
-        on_release: app.root.current = 'EmotionRecognition'
-                
+    canvas.before:
+        Color:
+            rgba: 0.9, 0.8, 0.6, 1  # Color de fondo sólido
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
+
+    MDBoxLayout:
+        size_hint: 1, None
+        height: self.minimum_height
+        orientation: 'vertical'
+        spacing: '20dp'
+        pos_hint: {'center_y': 0.8}
+
+        MDLabel:
+            text: '- Recomendaciones -'
+            font_name: 'fonts/DellaRespira-Regular.ttf'
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 1, 1, 1, 1
+            font_size: '30sp'
+            size_hint_y: None
+            
+
+        MDLabel:
+            text: 'Nuestras recomendaciones para ti el día de hoy, de acuerdo a tu estilo: Romantico'
+            font_name: 'fonts/DellaRespira-Regular.ttf'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            font_size: '20sp'
+            halign: 'center'
+            valign: 'middle'
+            markup: True
+            size_hint_y: None
+
+        MDLabel:
+            text: 'Recuerda que durante este proceso, tomamos información de tu rostro a partir de tu cámara.'
+            font_name: 'fonts/DellaRespira-Regular.ttf'
+            theme_text_color: 'Custom'
+            text_color: 1, 1, 1, 1
+            font_size: '15sp'
+            disabled: True
+            halign: 'center'
+            valign: 'middle'
+            markup: True
+            size_hint_y: None
+
+
+    GridLayout:
+        cols: 2
+        spacing: '10dp'
+        size_hint_y: None
+        height: '48dp'
+
+        MDFillRoundFlatButton:
+            text: 'Regresar'
+            theme_text_color: 'Custom'
+            text_color: 0, 0, 0, 1
+            md_bg_color: 0.66, 0.66, 0.56, 0.5
+            on_release:
+                app.root.current = 'menu'
+                app.root.transition = SlideTransition(direction='right')
+
+        MDFillRoundFlatButton:
+            text: 'Ir a las recomendaciones'
+            theme_text_color: 'Custom'
+            text_color: 0, 0, 0, 1
+            md_bg_color: 0.66, 0.66, 0.56, 0.5
+            on_release:
+                app.root.current = 'EmotionRecognition'
+                app.root.transition = SlideTransition(direction='right')
+
+
+               
 <EmotionRecognition>
     name: 'EmotionRecognition'
     on_enter: app.startpassImage()
-    MDLabel:
-        id: emotion_label
-        text: ''
-        theme_text_color: "Custom"
-        color: 1, 1, 1, 1
-    MDRaisedButton:
-        text: 'Siguiente'
-        on_release: app.passImage_emotion()
+    canvas.before:
+        Color:
+            rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
+    
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        size: dp(200), dp(200)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        AsyncImage:
+            id: recomendation_image
+            source: ''
+            size_hint: None, None
+            size: dp(200), dp(200)
+            allow_stretch: True
+            keep_ratio: True
+    
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        size: dp(200), dp(200)
+        pos_hint: {'center_x': 0.5, 'top': 1}
+
+        MDLabel:
+            id: emotion_label
+            text: ''
+            theme_text_color: "Custom"
+            color: 1, 1, 1, 1
+
+        MDLabel:
+            id: detection_label
+            text: ''
+            theme_text_color: "Custom"
+            color: 1, 1, 1, 1
+    
+    GridLayout:
+        cols: 2
+        spacing: '10dp'
+        size_hint_y: None
+        height: '48dp'
+
+        MDFillRoundFlatButton:
+            text: 'Regresar'
+            theme_text_color: 'Custom'
+            text_color: 0, 0, 0, 1
+            md_bg_color: 0.66, 0.66, 0.56, 0.5
+            on_release:
+                app.root.current = 'menu'
+                app.root.transition = SlideTransition(direction='right')
+
+        MDFillRoundFlatButton:
+            text: 'Siguiente'
+            theme_text_color: 'Custom'
+            text_color: 0, 0, 0, 1
+            md_bg_color: 0.66, 0.66, 0.56, 0.5
+            on_release:
+                app.passImage_emotion()
+
 
 
 <TestResult>
     name: 'testResult'
+    canvas.before:
+        Color:
+            rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
     on_enter: app.show_emotionResult()
-    MDLabel:
-        id: testResult_label
-        text: 'Pene'
-        theme_text_color: "Custom"
-        color: 0, 0, 0, 1
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        size: dp(250), dp(450)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        padding: dp(10)
+        
+        MDLabel:
+            id: testResult_label
+            text: ' '
+            theme_text_color: "Custom"
+            color: 1, 1, 1, 1  # Letras blancas
+            size_hint_y: None
+            height: dp(60)
+            valign: 'top'
 
+        AsyncImage:
+            id: recomendation_image
+            source: ''
+            size_hint: None, None
+            size: dp(230), dp(330)
+            allow_stretch: True
+            keep_ratio: True
+            pos_hint: {'center_x': 0.5}
 
-<Cupones>
-    name:'Cupones'
+    MDFillRoundFlatButton:
+        text: 'Regresar'
+        theme_text_color: 'Custom'
+        text_color: 1, 1, 1, 1  # Letras blancas
+        pos_hint: {'center_x': 0.5}
+        md_bg_color: 0.66, 0.66, 0.56, 0.5
+        on_release:
+            app.root.current = 'menu'
+            app.root.transition = SlideTransition(direction='right')
+
+<Cupones>:
+    name: 'Cupones'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
-        MDBoxLayout:#distrubicion de cajitas
-            orientation : 'vertical'
+        canvas.before:
+            Color:
+                rgba: 0.9, 0.8, 0.6, 1  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
+        MDBoxLayout:
+            orientation: 'vertical'
             MDBoxLayout:
-                size_hint: 1,0.2# tamaño x y
-                orientation : 'horizontal'
-                paddind: '10dp'#margen 
-
+                size_hint: 1, 0.2
+                orientation: 'horizontal'
+                padding: '10dp'
                 MDLabel:
-
-                    text: 'Cupones'
+                    text: '- Cupones -'
+                    font_name: 'fonts/DellaRespira-Regular.ttf'
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
-                    theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
-                    font_size: 30
-                
-                
+                    theme_text_color: 'Custom'
+                    text_color: 0, 0, 0, 1
+                    font_size: '30sp'
+
             MDGridLayout:
-                #cols: 3#columnas
-                rows:4
-                size_hint: 1,2# tamño x, y
-                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                rows: 2
+                cols: 2
+                size_hint: 1, 2
+                padding: '10dp'
                 spacing: '10dp'
 
-                ElementCard:
-                    text:'Detalles'
-                    #sub_text: 'Solo disponible en tienda'
-                    image: 'Sources and Tools/Cupon1.png'
+                MDCard:
+                    orientation: 'vertical'
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                    
-                    image_ratio: None
-                    on_release: app.root.current = 'Cupon1'
-                    
-                ElementCard:
-                    text:'Detalles'
-                    image:'Sources and Tools/Cupon2.png'
+                    size: '180dp', '300dp'
+                    md_bg_color: 0.9, 0.8, 0.6, 1
+                    elevation: 3
+                    radius: [dp(10),]
+
+                    Image:
+                        source: 'Sources and Tools/Cupon1.png'
+
+                    MDLabel:
+                        text: '¡Aprovecha en descuentos para ropa interior!'
+                        font_name: 'fonts/DellaRespira-Regular.ttf'
+                        halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: 1, 1, 1, 1
+
+                    MDFillRoundFlatButton:
+                        text: 'Ver detalles'
+                        theme_text_color: 'Custom'
+                        text_color: 0, 0, 0, 1
+                        md_bg_color: 0.66, 0.66, 0.56, 0.5
+                        on_release: app.root.current = 'Cupon1'
+
+                MDCard:
+                    orientation: 'vertical'
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                    
-                    image_ratio: None
-                    on_release: app.root.current = 'Cupon2'
-                ElementCard:
-                    text:'Detalles'
-                    image:'Sources and Tools/Cupon3.png'
+                    size: '180dp', '300dp'
+                    md_bg_color: 0.9, 0.8, 0.6, 1
+                    elevation: 3
+                    radius: [dp(10),]
+
+                    Image:
+                        source: 'Sources and Tools/Cupon2.png'
+
+                    MDLabel:
+                        text: '¡Aprovecha en descuentos para ropa de verano!'
+                        font_name: 'fonts/DellaRespira-Regular.ttf'
+                        halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: 1, 1, 1, 1
+
+
+                    MDFillRoundFlatButton:
+                        text: 'Ver detalles'
+                        theme_text_color: 'Custom'
+                        text_color: 0, 0, 0, 1
+                        md_bg_color: 0.66, 0.66, 0.56, 0.5
+                        on_release: app.root.current = 'Cupon2'
+
+                MDCard:
+                    orientation: 'vertical'
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                    
-                    image_ratio: None
-                    on_release: app.root.current = 'Cupon3'
-                ElementCard:
-                    text:'Detalles'
-                    image:'Sources and Tools/Cupon4.png'
+                    size: '180dp', '300dp'
+                    md_bg_color: 0.9, 0.8, 0.6, 1
+                    elevation: 3
+                    radius: [dp(10),]
+
+                    Image:
+                        source: 'Sources and Tools/Cupon3.png'
+
+                    MDLabel:
+                        text: '¡Aprovecha en descuentos para ropa de invierno!'
+                        font_name: 'fonts/DellaRespira-Regular.ttf'
+                        halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: 1, 1, 1, 1
+
+
+                    MDFillRoundFlatButton:
+                        text: 'Ver detalles'
+                        theme_text_color: 'Custom'
+                        text_color: 0, 0, 0, 1
+                        md_bg_color: 0.66, 0.66, 0.56, 0.5
+                        on_release: app.root.current = 'Cupon3'
+
+                MDCard:
+                    orientation: 'vertical'
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                    
-                    image_ratio: None
-                    on_release: app.root.current = 'Cupon4'
+                    size: '180dp', '300dp'
+                    md_bg_color: 0.9, 0.8, 0.6, 1
+                    elevation: 3
+                    radius: [dp(10),]
+
+                    Image:
+                        source: 'Sources and Tools/Cupon4.png'
+
+                    MDLabel:
+                        text: '¡Aprovecha en descuentos para ropa de otoño!'
+                        font_name: 'fonts/DellaRespira-Regular.ttf'
+                        halign: 'center'
+                        theme_text_color: 'Custom'
+                        text_color: 1, 1, 1, 1
+
+                    MDFillRoundFlatButton:
+                        text: 'Ver detalles'
+                        theme_text_color: 'Custom'
+                        text_color: 0, 0, 0, 1
+                        md_bg_color: 0.66, 0.66, 0.56, 0.5
+                        on_release: app.root.current = 'Cupon4'
+
                 MDFillRoundFlatButton:
                     text: 'Regresar'
-                    theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
-                    md_bg_color:  0.66, 0.66, 0.56, 0.5
+                    theme_text_color: 'Custom'
+                    text_color: 0, 0, 0, 1
+                    md_bg_color: 0.66, 0.66, 0.56, 0.5
+                    on_release:
+                        app.root.current = 'menu'
+                        app.root.transition = SlideTransition(direction='right')
 
-                    #pos_hint:{'center_x':0.5}
-                    on_release: 
-                        app.root.current='menu'
-                        app.root.transition= SlideTransition(direction='right')
+
+
+
+
+
+
 <Cupon1>
     name: 'Cupon1'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
+        canvas.before:
+            Color:
+                rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
         Image:
             source:'Sources and Tools/Cupon1.png' 
         MDLabel:
@@ -417,7 +672,13 @@ AppManager:
 <Cupon2>
     name: 'Cupon2'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
+        canvas.before:
+            Color:
+                rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
         Image:
             source:'Sources and Tools/Cupon2.png'  
         MDFillRoundFlatButton:
@@ -433,7 +694,13 @@ AppManager:
 <Cupon3>
     name: 'Cupon3'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
+        canvas.before:
+            Color:
+                rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
         Image:
             source:'Sources and Tools/Cupon3.png'
         MDFillRoundFlatButton:
@@ -449,7 +716,15 @@ AppManager:
 <Cupon4>
     name: 'Cupon4'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
+        
+        canvas.before:
+            Color:
+                rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
+
         Image:
             source:'Sources and Tools/Cupon4.png'
         MDFillRoundFlatButton:
@@ -468,135 +743,213 @@ AppManager:
 <MiEstilo>
     name: 'MiEstilo'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
-        MDBoxLayout:#distrubicion de cajitas
-            orientation : 'vertical'
+        canvas.before:
+            Color:
+                rgba: (0.9, 0.8, 0.6, 1)  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
+        MDBoxLayout:
+            orientation: 'vertical'
             MDBoxLayout:
-                size_hint: 1,0.2# tamaño x y
-                orientation : 'vertical'
-                paddind: '10dp'#margen 
-
+                size_hint: 1, 0.4
+                orientation: 'vertical'
+                padding: '10dp'
                 MDLabel:
-
-                    text: 'Tu estilo es romantico'
+                    text: ' - Tu estilo es: romántico -'
+                    font_name: 'fonts/DellaRespira-Regular.ttf'
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
-                    theme_text_color: "Custom"
-                
-                    color: 0 , 0, 0 , 1
-                    font_size: 30
-                
-                MDLabel:
+                    theme_text_color: 'Custom'
+                    color: 0, 0, 0, 1
+                    font_size: '30sp'
 
-                    text: 'Te recomendamos el las siguentes marcas'
+                MDLabel:
+                    text: 'Te recomendamos las siguientes marcas:'
+                    font_name: 'fonts/DellaRespira-Regular.ttf'
                     halign: 'center'
-                   
-                    theme_text_color: "Custom"
-                
-                    color: 0 , 0, 0 , 1
-                    font_size: 18
+                    theme_text_color: 'Custom'
+                    color: 0, 0, 0, 1
+                    font_size: '18sp'
+
             MDGridLayout:
-                cols: 2#columnas
-                #rows:4
-                
-                size_hint: 1,2.5# tamño x, y
-                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                cols: 2
+                size_hint: 1, 2.5
+                padding: '10dp'
                 spacing: '10dp'
 
-                ElementCard2:
-                    image:'Sources and Tools/Logo.png'
+                MDCard:
                     size_hint: None, None
                     size: dp(180), dp(300)
-                    
-                ElementCard2:
-                    image:'Sources and Tools/Logo2.png'
+                    elevation: 3
+                    radius: [10]
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/Logo.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
                     size: dp(180), dp(300)
-                ElementCard2:
-                    image:'Sources and Tools/Logo3.png'
+                    elevation: 3
+                    radius: [10]
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/Logo2.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
                     size: dp(180), dp(300)
-                ElementCard2:
-                    image:'Sources and Tools/Logo4.png'
+                    elevation: 3
+                    radius: [10]
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/Logo3.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
                     size: dp(180), dp(300)
-           
+                    elevation: 3
+                    radius: [10]
+                    MDBoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/Logo4.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
                 MDFillRoundFlatButton:
-                    
                     text: 'Regresar'
-                    theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
-                    pos_hint:{'center_x':0.5}
-                    md_bg_color:  0.66, 0.66, 0.56, 0.5
-                    on_release: 
-                        app.root.current='menu'
-                        app.root.transition= SlideTransition(direction='right')
+                    theme_text_color: 'Custom'
+                    text_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': 0.5}
+                    md_bg_color: 0.66, 0.66, 0.56, 0.5
+                    on_release:
+                        app.root.current = 'menu'
+                        app.root.transition = SlideTransition(direction='right')
+
                 
-           
 
-       
-
-
-<Catalogo>
+<Catalogo>:
     name: 'Catalogo'
     MDScreen:
-        md_bg_color:0.9,0.8,0.6#color fondo
-        MDBoxLayout:#distrubicion de cajitas
-            orientation : 'vertical'
+        canvas.before:
+            Color:
+                rgba: 0.9, 0.8, 0.6, 1  # Color de fondo sólido
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'Sources and Tools/gradiente_dorado.png'  # Ruta de la imagen de gradiente dorado
+        MDBoxLayout:
+            orientation: 'vertical'
             MDBoxLayout:
-                size_hint: 1,0.2# tamaño x y
-                orientation : 'horizontal'
-                paddind: '10dp'#margen 
-
+                size_hint: 1, 0.1
+                orientation: 'horizontal'
+                padding: '10dp'
                 MDLabel:
-
-                    text: 'Catalogo'
+                    text: '- Catálogo -'
+                    font_name: 'fonts/DellaRespira-Regular.ttf'
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
-                    theme_text_color: "Custom"
-                
-                    color: 0 , 0, 0 , 1
-                    font_size: 30
-                
+                    theme_text_color: 'Custom'
+                    color: 0, 0, 0, 1
+                    font_size: '20sp'
+
             MDGridLayout:
-                cols: 2#columnas
-                #rows:4
-                
-                size_hint: 1,2.5# tamño x, y
-                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                cols: 2
+                size_hint: 1, 1
+                padding: '10dp'
                 spacing: '10dp'
 
-                ElementCard2:
-                    image:'Sources and Tools/C2.png'
+                MDCard:
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                ElementCard2:
-                    image:'Sources and Tools/C3.png'
+                    size: dp(140), dp(200)
+                    elevation: 3
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Modificado
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/C2.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                ElementCard2:
-                    image:'Sources and Tools/C4.png'
+                    size: dp(140), dp(200)
+                    elevation: 3
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Modificado
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/C3.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                ElementCard2:
-                    image:'Sources and Tools/C6.png'
+                    size: dp(140), dp(200)
+                    elevation: 3
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Modificado
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/C4.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                ElementCard2:
-                    image:'Sources and Tools/C7.png'
+                    size: dp(160), dp(200)
+                    elevation: 3
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Modificado
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/C6.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
-                    size: dp(180), dp(300)
-                ElementCard2:
-                    image:'Sources and Tools/C5.png'
+                    size: dp(160), dp(200)
+                    elevation: 3
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Modificado
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/C7.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
+                MDCard:
                     size_hint: None, None
-                    size: dp(180), dp(300)
+                    size: dp(160), dp(200)
+                    elevation: 3
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Modificado
+                    BoxLayout:
+                        orientation: 'vertical'
+                        Image:
+                            source: 'Sources and Tools/C5.png'
+                            allow_stretch: True
+                            keep_ratio: False
+
                 MDFillRoundFlatButton:
-                    
                     text: 'Regresar'
-                    theme_text_color: "Custom"
-                    text_color: 0 , 0 , 0 , 1
-                    pos_hint:{'center_x':0.5}
-                    md_bg_color:  0.66, 0.66, 0.56, 0.5
-                    on_release: 
-                        app.root.current='menu'
-                        app.root.transition= SlideTransition(direction='right')
+                    theme_text_color: 'Custom'
+                    text_color: 0, 0, 0, 1
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    md_bg_color: 0.66, 0.66, 0.56, 0.5
+                    on_release:
+                        app.root.current = 'menu'
+                        app.root.transition = SlideTransition(direction='right')
+
+

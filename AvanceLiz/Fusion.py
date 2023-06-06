@@ -27,6 +27,9 @@ from kivy.config import Config
 from collections import Counter
 from kivy.uix.label import Label
 import statistics
+from kivy.properties import ListProperty
+from kivymd.uix.textfield import MDTextField
+
 
 class EmotionRecognition(Screen):
     def __init__(self, **kwargs):
@@ -53,8 +56,7 @@ class EmotionRecognition(Screen):
         self.add_widget(self.image)
 
 
-
-        self.label = Label(text='No se puede detectar', font_size=20)
+        self.label = Label(text='Detección de emociones', pos_hint={'x': 0.1, 'top': 0.95}, size_hint=(0.8, 0.05), halign='center', font_name='fonts/DellaRespira-Regular.ttf')
         self.add_widget(self.label)
 
         # Programar la actualización del fotograma
@@ -90,29 +92,30 @@ class EmotionRecognition(Screen):
 
         if results.multi_face_landmarks:
             for face in results.multi_face_landmarks:
-                self.mpDraw.draw_landmarks(frame, face, self.mpFacialMesh.FACEMESH_CONTOURS, self.drawSettings,
-                                           self.drawSettings)
+                #self.mpDraw.draw_landmarks(frame, face, self.mpFacialMesh.FACEMESH_CONTOURS, self.drawSettings, self.drawSettings)
 
                 height, width, c = frame.shape
 
                 face_points = [33, 133, 362, 263]
 
                 points = []
+             
+                
                 for p in face_points:
                     landmark = face.landmark[p]
                     x, y, z = int(landmark.x * frame.shape[1]), int(landmark.y * frame.shape[0]), landmark.z
                     points.append((x, y))
-                    cv2.circle(frame, (x, y), 2, (0, 0, 255), -1)
-
+                    #cv2.circle(frame, (x, y), 2, (0, 0, 255), -1)
+      
                 if len(points) == len(face_points):
                     pixel_width = abs(points[0][0] - points[3][0])
                     distance = (self.known_width * self.focal_length) / pixel_width
-                    cv2.putText(frame, f"{distance:.2f} cm", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+                    #cv2.putText(frame, f"{distance:.2f} cm", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
                 for id, points in enumerate(face.landmark):
                     xo, yo = int(points.x * width), int(points.y * height)
                     lista.append([id, xo, yo])
-                    cv2.putText(frame, str(id), (xo, yo), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1)
+                    #cv2.putText(frame, str(id), (xo, yo), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1)
 
                     if len(lista) == 468 and distance < 104 and distance > 80:
 
@@ -126,25 +129,25 @@ class EmotionRecognition(Screen):
                         # Boca extremos
                         x1, y1 = lista[308][1:]
                         x2, y2 = lista[61][1:]
-                        cv2.line(frame, (x1, y1), (x2, y2), (0, 0, 255), 3)
+                        #cv2.line(frame, (x1, y1), (x2, y2), (0, 0, 255), 3)
                         distanciaBocaExtremo = self.distance_calculator(x1, x2, y1, y2)
 
                         # Boca apertura
                         x3, y3 = lista[13][1:]
                         x4, y4 = lista[14][1:]
-                        cv2.line(frame, (x3, y3), (x4, y4), (0, 0, 255), 3)
+                        #cv2.line(frame, (x3, y3), (x4, y4), (0, 0, 255), 3)
                         distanciaBocaApertura = self.distance_calculator(x3, x4, y3, y4)
 
                         # Extremo ojo der - Ceja Derecha
                         x5, y5 = lista[65][1:]
                         x6, y6 = lista[158][1:]
-                        cv2.line(frame, (x5, y5), (x6, y6), (0, 0, 255), 3)
+                        #cv2.line(frame, (x5, y5), (x6, y6), (0, 0, 255), 3)
                         distanciaCejaDer = self.distance_calculator(x5, x6, y5, y6)
 
                         # Extremo ojo izq - Ceja Izq
                         x7, y7 = lista[295][1:]
                         x8, y8 = lista[385][1:]
-                        cv2.line(frame, (x7, y7), (x8, y8), (0, 0, 255), 3)
+                        #cv2.line(frame, (x7, y7), (x8, y8), (0, 0, 255), 3)
                         distanciaCejaIzq = self.distance_calculator(x7, x8, y7, y8)
 
                         distanciaCejas = (distanciaCejaDer + distanciaCejaIzq) / 2
@@ -152,13 +155,13 @@ class EmotionRecognition(Screen):
                         # Mejilla Izquierda
                         x9, y9 = lista[410][1:]
                         x10, y10 = lista[427][1:]
-                        cv2.line(frame, (x9, y9), (x10, y10), (0, 0, 255), 3)
+                        #cv2.line(frame, (x9, y9), (x10, y10), (0, 0, 255), 3)
                         distainciaMejillaIzq = self.distance_calculator(x9, x10, y9, y10)
 
                         # Mejilla Der
                         x11, y11 = lista[186][1:]
                         x12, y12 = lista[207][1:]
-                        cv2.line(frame, (x11, y11), (x12, y12), (0, 0, 255), 3)
+                        #cv2.line(frame, (x11, y11), (x12, y12), (0, 0, 255), 3)
                         distainciaMejillaDer = self.distance_calculator(x11, x12, y11, y12)
 
                         distanciaMejillas = (distainciaMejillaDer + distainciaMejillaIzq) / 2
@@ -166,13 +169,13 @@ class EmotionRecognition(Screen):
                         # Pata Gallo Izq
                         x13, y13 = lista[346][1:]
                         x14, y14 = lista[340][1:]
-                        cv2.line(frame, (x13, y13), (x14, y14), (0, 0, 255), 3)
+                        #cv2.line(frame, (x13, y13), (x14, y14), (0, 0, 255), 3)
                         distanciaPataGalloIzq = self.distance_calculator(x13, x14, y13, y14)
 
                         # Pata Gallo Der
                         x15, y15 = lista[117][1:]
                         x16, y16 = lista[111][1:]
-                        cv2.line(frame, (x15, y15), (x16, y16), (0, 0, 255), 3)
+                        #cv2.line(frame, (x15, y15), (x16, y16), (0, 0, 255), 3)
                         distanciaPataGalloDer = self.distance_calculator(x15, x16, y15, y16)
 
                         distanciaPataGallo = (distanciaPataGalloDer + distanciaPataGalloIzq) / 2
@@ -180,13 +183,13 @@ class EmotionRecognition(Screen):
                         # Pata Gallo Izq 2
                         x17, y17 = lista[448][1:]
                         x18, y18 = lista[342][1:]
-                        cv2.line(frame, (x17, y17), (x18, y18), (0, 0, 255), 3)
+                        #cv2.line(frame, (x17, y17), (x18, y18), (0, 0, 255), 3)
                         distanciaPataGalloIzq2 = self.distance_calculator(x17, x18, y17, y18)
 
                         # Pata Gallo Der 2
                         x19, y19 = lista[228][1:]
                         x20, y20 = lista[113][1:]
-                        cv2.line(frame, (x19, y19), (x20, y20), (0, 0, 255), 3)
+                        #cv2.line(frame, (x19, y19), (x20, y20), (0, 0, 255), 3)
                         distanciaPataGalloDer2 = self.distance_calculator(x19, x20, y19, y20)
 
                         distanciaPataGallo2 = (distanciaPataGalloIzq2 + distanciaPataGalloDer2) / 2
@@ -200,20 +203,20 @@ class EmotionRecognition(Screen):
 
                         self.promedio = self.evaluate_emotions(emotions, distance)
 
-                        if self.promedio > 27.3 and self.promedio < 31:
+                        if self.promedio > 30 and self.promedio < 31.7:
                             emotion = "Normal"
                             self.registered_emotions.append("Normal")
-                        elif self.promedio > 32 and self.promedio < 34:
+                        elif self.promedio > 32 and self.promedio < 35:
                             emotion = "Disgusto"
                             self.registered_emotions.append("Disgusto")
-                        elif self.promedio > 37.8 and self.promedio < 39.2:
+                        elif self.promedio > 36 and self.promedio < 40:
                             emotion = "Feliz"
                             self.registered_emotions.append("Feliz")
-                        elif self.promedio > 41 and self.promedio < 42:
+                        elif self.promedio > 40 and self.promedio < 44:
                             emotion = "Sorprendido"
                             self.registered_emotions.append("Sorprendido")
                         
-                        #print(promedio)
+                        #print(self.promedio)
                         
                         #print(emotion)
                     
@@ -233,10 +236,15 @@ class EmotionRecognition(Screen):
 
 
     def get_emotionmode(self):
-        moda = statistics.mode(self.registered_emotions)
-        self.registered_emotions.clear()
-        print(moda)
-        return moda
+        try:
+            moda = statistics.mode(self.registered_emotions)
+            self.registered_emotions.clear()
+            print(moda)
+            return moda
+        except statistics.StatisticsError:
+            # Manejo del error cuando no hay moda para los datos vacíos
+            print("No hay modo disponible para los datos vacíos")
+            return None
 
     def on_stop(self):
         self.cap.release()
@@ -276,7 +284,7 @@ class PreEmotionRecognition(Screen):
 
 class EmotionRecognitionApp(MDApp):
     next_button_count = 0
-    image_paths = ['Sources and Tools/C2.png', 'Sources and Tools/C3.png', 'Sources and Tools/C4.png']
+    image_paths = ['Sources and Tools/R1.jpg', 'Sources and Tools/R2.png', 'Sources and Tools/R3.png']
     emotion_data = []
     def build(self):
         # Establecer el tamaño fijo de la ventana
@@ -308,11 +316,12 @@ class EmotionRecognitionApp(MDApp):
             dialog.open()
     
     def startpassImage(self):
+        self.emotion_data.clear()
         screen = self.root.get_screen('EmotionRecognition')
 
         if self.next_button_count == 0:
-            screen.ids.emotion_label.text = self.image_paths[0]
             image_path = self.image_paths[0]
+            screen.ids.recomendation_image.source = image_path
             
             emotion_mode = screen.get_emotionmode()
             data = {'emotion_mode': emotion_mode, 'image_path': image_path}
@@ -324,7 +333,7 @@ class EmotionRecognitionApp(MDApp):
         screen = self.root.get_screen('EmotionRecognition')
 
         if self.next_button_count < len(self.image_paths):
-            screen.ids.emotion_label.text = self.image_paths[self.next_button_count]
+            screen.ids.recomendation_image.source = self.image_paths[self.next_button_count]
             image_path = self.image_paths[self.next_button_count]
             
             emotion_mode = screen.get_emotionmode()
@@ -342,15 +351,14 @@ class EmotionRecognitionApp(MDApp):
             print(element)
 
         for element in self.emotion_data:
-            if element['emotion_mode'] == 'Feliz':
+            if element['emotion_mode'] == 'Feliz' or element['emotion_mode'] == 'Sorprendido':
                 screen = self.root.get_screen('testResult')
-                screen.ids.testResult_label.text = element['image_path']
+                screen.ids.testResult_label.text = 'Según nuestro análisis, la recomendación que más te gustó fue: '
+                print(element['image_path'])
+                screen.ids.recomendation_image.source = str(element['image_path'])
             else:
                 screen = self.root.get_screen('testResult')
-                screen.ids.testResult_label.text = 'Y CON EL CORRIDÓN'
-
-
-                 
+                screen.ids.testResult_label.text = 'No tenemos suficientes evidencias para determinar cuál te gustó más, pero creemos que fue esta: '
 
 
 if __name__ == '__main__':
