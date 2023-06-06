@@ -94,6 +94,7 @@ AppManager:
     Cupon2:
     Cupon3:
     Cupon4:
+    testResult:
 
 
 <LoginApp>:
@@ -186,7 +187,23 @@ AppManager:
 <EmotionRecognition>
     name: 'EmotionRecognition'
     MDLabel:
-        text: 'Hola'
+        id: emotion_label
+        text: 'Te recomendamos lo siguiente: '
+        theme_text_color: "Custom"
+        color: 0, 0, 0, 1
+    MDRaisedButton:
+        text: 'Siguiente'
+        on_release: app.passImage_emotion()
+
+<testResult>
+    name: 'testResult'
+    MDLabel:
+        id: testResult_label
+        text: ' '
+        theme_text_color: "Custom"
+        color: 0, 0, 0, 1
+
+
 <Cupones>
     name:'Cupones'
     MDScreen:
