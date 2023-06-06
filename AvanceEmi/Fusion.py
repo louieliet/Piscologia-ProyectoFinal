@@ -255,7 +255,7 @@ class testResult(Screen):
 
 class EmotionRecognitionApp(MDApp):
     next_button_count = 0
-    image_paths = ['path/to/image1.jpg', 'path/to/image2.jpg', 'path/to/image3.jpg']
+    image_paths = ['Sources and Tools/C2.png', 'Sources and Tools/C3.png', 'Sources and Tools/C4.jpg']
     emotion_data = []
     
     def build(self):
