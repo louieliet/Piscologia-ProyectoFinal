@@ -84,6 +84,7 @@
  #   size_hint: 1,None
   #  halign:self.minimun_height
 AppManager:
+    Inicio:
     LoginApp:
     Menu:
     EmotionRecognition:
@@ -95,6 +96,67 @@ AppManager:
     Cupon3:
     Cupon4:
 
+<Inicio>:
+    name:'Inicio'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        MDBoxLayout:#distrubicion de cajitas
+            orientation : 'vertical'
+            MDBoxLayout:
+                size_hint: 1,0.2# tamaño x y
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
+
+                MDLabel:
+
+                    text: ' BIENVENIDO'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0 , 0 , 0 , 1
+                    font_size: 30
+                
+                
+            MDGridLayout:
+                #cols: 3#columnas
+                rows:4
+                size_hint: 1,2# tamño x, y
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
+                spacing: '10dp'
+
+                ElementCard2:
+                    md_bg_color:0.9,0.8,0.6
+                    image: 'Sources and Tools/FF.png'
+                   
+                MDLabel:
+                    text: 'FashonFinder'
+                    halign: 'center'
+                    pos_hint: {'center_y': 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 0 , 0 , 0 , 1
+                    font_size: 30
+                MDLabel:
+                    text: 'Tu estilo en un escaneo'
+                    halign: 'center'
+                    
+                    theme_text_color: "Custom"
+                    text_color: 0 , 0 , 0 , 1
+                    font_size: 30
+                
+                MDFillRoundFlatButton:
+                    
+                    text: 'Login'
+                    theme_text_color: "Custom"
+                    text_color: 0 , 0 , 0 , 1
+                    md_bg_color:  0.66, 0.66, 0.56, 0.5
+
+                    #pos_hint:{'center_x':0.5}
+                    on_release: 
+                        app.root.current='registerscreen'
+                        app.root.transition= SlideTransition(direction='right')
+                
+
+            
 
 <LoginApp>:
     name: 'registerscreen'
@@ -220,22 +282,38 @@ AppManager:
                 spacing: '10dp'
 
                 ElementCard:
-                    text:'Detalles del cupon'
-                    sub_text: 'Solo disponible en tienda'
+                    text:'Detalles'
+                    #sub_text: 'Solo disponible en tienda'
                     image: 'Sources and Tools/Cupon1.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
+                    
+                    image_ratio: None
                     on_release: app.root.current = 'Cupon1'
                     
                 ElementCard:
-                    text:'Detalles del cupon'
+                    text:'Detalles'
                     image:'Sources and Tools/Cupon2.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
+                    
+                    image_ratio: None
                     on_release: app.root.current = 'Cupon2'
                 ElementCard:
-                    text:'Detalles del cupon'
+                    text:'Detalles'
                     image:'Sources and Tools/Cupon3.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
+                    
+                    image_ratio: None
                     on_release: app.root.current = 'Cupon3'
                 ElementCard:
-                    text:'Detalles del cupon'
+                    text:'Detalles'
                     image:'Sources and Tools/Cupon4.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
+                    
+                    image_ratio: None
                     on_release: app.root.current = 'Cupon4'
                 MDFillRoundFlatButton:
                     
@@ -270,7 +348,7 @@ AppManager:
             pos_hint:{'center_x':0.5}
             md_bg_color:  0.66, 0.66, 0.56, 0.5
             on_release: 
-                app.root.current='menu'
+                app.root.current='Cupones'
                 app.root.transition= SlideTransition(direction='right')            
         
 <Cupon2>
@@ -287,7 +365,7 @@ AppManager:
             pos_hint:{'center_x':0.5}
             md_bg_color:  0.66, 0.66, 0.56, 0.5
             on_release: 
-                app.root.current='menu'
+                app.root.current='Cupones'
                 app.root.transition= SlideTransition(direction='right')   
 <Cupon3>
     name: 'Cupon3'
@@ -303,7 +381,7 @@ AppManager:
             pos_hint:{'center_x':0.5}
             md_bg_color:  0.66, 0.66, 0.56, 0.5
             on_release: 
-                app.root.current='menu'
+                app.root.current='Cupones'
                 app.root.transition= SlideTransition(direction='right') 
 <Cupon4>
     name: 'Cupon4'
@@ -319,7 +397,7 @@ AppManager:
             pos_hint:{'center_x':0.5}
             md_bg_color:  0.66, 0.66, 0.56, 0.5
             on_release: 
-                app.root.current='menu'
+                app.root.current='Cupones'
                 app.root.transition= SlideTransition(direction='right')     
 
 
@@ -353,7 +431,7 @@ AppManager:
                     theme_text_color: "Custom"
                 
                     color: 0 , 0, 0 , 1
-                    font_size: 12
+                    font_size: 18
             MDGridLayout:
                 cols: 2#columnas
                 #rows:4
@@ -364,14 +442,21 @@ AppManager:
 
                 ElementCard2:
                     image:'Sources and Tools/Logo.png'
-                    on_release: app.root.current = 'Cupon1'
-
+                    size_hint: None, None
+                    size: dp(180), dp(300)
+                    
                 ElementCard2:
                     image:'Sources and Tools/Logo2.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 ElementCard2:
                     image:'Sources and Tools/Logo3.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 ElementCard2:
                     image:'Sources and Tools/Logo4.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
            
                 MDFillRoundFlatButton:
                     
@@ -420,16 +505,28 @@ AppManager:
 
                 ElementCard2:
                     image:'Sources and Tools/C2.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 ElementCard2:
                     image:'Sources and Tools/C3.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 ElementCard2:
                     image:'Sources and Tools/C4.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 ElementCard2:
                     image:'Sources and Tools/C6.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 ElementCard2:
                     image:'Sources and Tools/C7.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 ElementCard2:
                     image:'Sources and Tools/C5.png'
+                    size_hint: None, None
+                    size: dp(180), dp(300)
                 MDFillRoundFlatButton:
                     
                     text: 'Regresar'

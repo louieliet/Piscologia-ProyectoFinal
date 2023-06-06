@@ -1,0 +1,1 @@
+iaPataGalloDer + distanciaPataGalloIzq) / 2
