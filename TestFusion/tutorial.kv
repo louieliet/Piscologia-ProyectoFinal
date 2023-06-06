@@ -9,6 +9,7 @@
     #size: '750dp','120dp'
     image:''
     text:''
+    sub_text: ''
     
     orientation: 'horizontal'
     ripple_behavior:True
@@ -23,6 +24,12 @@
             text: root.text
             halign:'center'
             theme_text_color: "Custom"
+            font_size:18
+            
+        MDLabel:
+            sub_text:root.sub_text
+            halign:'center'
+            font_size:2
             
             text_color: 0 , 0 ,0 , 1#letra
     Image:
@@ -83,6 +90,10 @@ AppManager:
     Cupones:
     MiEstilo:
     Catalogo:
+    Cupon1:
+    Cupon2:
+    Cupon3:
+    Cupon4:
 
 
 <LoginApp>:
@@ -174,6 +185,8 @@ AppManager:
                 
 <EmotionRecognition>
     name: 'EmotionRecognition'
+    MDLabel:
+        text: 'Hola'
 <Cupones>
     name:'Cupones'
     MDScreen:
@@ -182,37 +195,76 @@ AppManager:
             orientation : 'vertical'
             MDBoxLayout:
                 size_hint: 1,0.2# tamaño x y
-                orientation : 'horizontal'# de izquierda a derecha
-                paddind: '3dp'#margen 
+                orientation : 'horizontal'
+                paddind: '10dp'#margen 
 
                 MDLabel:
 
-                    text: 'Cupones'
+                    text: 'Menu principal'
                     halign: 'center'
                     pos_hint: {'center_y': 0.5}
                     theme_text_color: "Custom"
                     text_color: 0 , 0 , 0 , 1
                     font_size: 30
                 
+                
             MDGridLayout:
-                cols: 6#columnas
-                #rows:2
-                
+                #cols: 3#columnas
+                rows:4
                 size_hint: 1,2# tamño x, y
-                padding : ['10dp','10dp','6dp','10dp']#izquieda, abajo, derecha,arriba
+                padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
                 spacing: '10dp'
-                
-                ElementCard2:
-                    image:'Sources and Tools/1.png'
-                    size_hint: None, None
-                    size: '120dp', '120dp'
-                    pos_hint: {'center_x': 0.5}
-                ElementCard2:
-                    image:'Sources and Tools/1.png'
+
+                ElementCard:
+                    text:'Detalles del cupon'
+                    sub_text: 'Solo disponible en tienda'
+                    image: 'Sources and Tools/Cupon1.png'
+                    on_release: app.root.current = 'Cupon1'
                     
+                ElementCard:
+                    text:'Detalles del cupon'
+                    image:'Sources and Tools/Cupon2.png'
+                    on_release: app.root.current = 'Cupon2'
+                ElementCard:
+                    text:'Detalles del cupon'
+                    image:'Sources and Tools/Cupon3.png'
+                    on_release: app.root.current = 'Cupon3'
+                ElementCard:
+                    text:'Detalles del cupon'
+                    image:'Sources and Tools/Cupon4.png'
+                    on_release: app.root.current = 'Cupon4'
+<Cupon1>
+    name: 'Cupon1'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon1.png' 
+        MDLabel:
+            text: 'Solo valido para departamento de ropa'
+            halign:'center'
+           
+            theme_text_color: "Custom"
+            font_size:18              
                 
-               
-                
+<Cupon2>
+    name: 'Cupon2'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon2.png'     
+<Cupon3>
+    name: 'Cupon3'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon3.png'     
+<Cupon4>
+    name: 'Cupon4'
+    MDScreen:
+        md_bg_color:0.9,0.8,0.6#color fondo
+        Image:
+            source:'Sources and Tools/Cupon4.png'     
+
 
 
 <MiEstilo>
@@ -242,7 +294,7 @@ AppManager:
                 cols: 2#columnas
                 #rows:4
                 
-                size_hint: 1,.8# tamño x, y
+                size_hint: 1,2.5# tamño x, y
                 padding : ['10dp','10dp','10dp','10dp']#izquieda, abajo, derecha,arriba
                 spacing: '10dp'
 
