@@ -189,11 +189,13 @@ class EmotionRecognition(Screen):
 
                         print(promedio)
 
-                        if promedio > 27.3 and promedio < 34.2:
+                        if promedio > 27.3 and promedio < 30:
                             emotion = "Normal"
+                        elif promedio > 30 and promedio < 33:
+                            emotion = "Disgusto"
                         elif promedio > 34.6 and promedio < 37.8:
                             emotion = "Feliz"
-                        elif promedio > 38 and promedio < 42:
+                        elif promedio > 39.6 and promedio < 42:
                             emotion = "Sorprendido"
 
                         # Mostrar la emoción en el centro de la pantalla
