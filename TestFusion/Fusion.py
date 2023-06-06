@@ -206,9 +206,9 @@ class EmotionRecognition(Screen):
         blurred_frame = self.apply_blur(frame)
 
         # Mostrar el fotograma en la imagen de Kivy
-        texture = Texture.create(size=(frame.shape[1], frame.shape[0]))
+        texture = Texture.create(size=(blurred_frame.shape[1], blurred_frame.shape[0]))
         texture.flip_vertical()
-        texture.blit_buffer(frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
+        texture.blit_buffer(blurred_frame.tobytes(), colorfmt='bgr', bufferfmt='ubyte')
         self.image.texture = texture
 
     def on_stop(self):
