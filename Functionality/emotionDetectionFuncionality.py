@@ -17,7 +17,7 @@ class facialDetection():
 
         #Almacenando la malla facial
         self.mpFacialMesh = mp.solutions.face_mesh
-        self.facialMesh = self.mpFacialMesh.FaceMesh(max_num_faces= 2)
+        self.facialMesh = self.mpFacialMesh.FaceMesh(max_num_faces= 1)
 
         # Constantes para la triangulación
         self.focal_length = 875 # Valor aproximado para la cámara de la laptop
@@ -76,7 +76,7 @@ class facialDetection():
                         lista.append([id, xo, yo])
                         cv2.putText(frame, str(id), (xo, yo), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (0, 0, 0), 1)
 
-                        if len(lista) == 468 and distance < 104 and distance > 80:
+                        if len(lista) == 468 and distance < 90 and distance > 80:
 
                             emotions = []
                             emotion = ''
@@ -171,7 +171,7 @@ class facialDetection():
                                 
                             cv2.putText(frame, str(emotion), (500, 500), cv2.FONT_HERSHEY_SIMPLEX, 5, (0,0,0), 10)
 
-                        if distance > 82:
+                        if distance >= 90:
                             cv2.putText(frame, "No se puede detectar", (480, 80), cv2.FONT_HERSHEY_PLAIN, 2, (0,0,255), 1)
                             
                             
