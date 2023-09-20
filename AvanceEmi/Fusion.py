@@ -63,7 +63,7 @@ class EmotionRecognition(Screen):
         blurred_frame = cv2.GaussianBlur(frame, (25, 25), 0)  # Ajusta los valores del tamaño del kernel según tus necesidades
         return blurred_frame
     
-    def distance_calculator(self, x1, x2, y1, y2):
+    def distanceCalculator(self, x1, x2, y1, y2):
         distance = math.hypot(x2 - x1, y2 - y1)
         return distance
     
@@ -125,25 +125,25 @@ class EmotionRecognition(Screen):
                         x1, y1 = lista[308][1:]
                         x2, y2 = lista[61][1:]
                         cv2.line(frame, (x1, y1), (x2, y2), (0, 0, 255), 3)
-                        distanciaBocaExtremo = self.distance_calculator(x1, x2, y1, y2)
+                        distanciaBocaExtremo = self.distanceCalculator(x1, x2, y1, y2)
 
                         # Boca apertura
                         x3, y3 = lista[13][1:]
                         x4, y4 = lista[14][1:]
                         cv2.line(frame, (x3, y3), (x4, y4), (0, 0, 255), 3)
-                        distanciaBocaApertura = self.distance_calculator(x3, x4, y3, y4)
+                        distanciaBocaApertura = self.distanceCalculator(x3, x4, y3, y4)
 
                         # Extremo ojo der - Ceja Derecha
                         x5, y5 = lista[65][1:]
                         x6, y6 = lista[158][1:]
                         cv2.line(frame, (x5, y5), (x6, y6), (0, 0, 255), 3)
-                        distanciaCejaDer = self.distance_calculator(x5, x6, y5, y6)
+                        distanciaCejaDer = self.distanceCalculator(x5, x6, y5, y6)
 
                         # Extremo ojo izq - Ceja Izq
                         x7, y7 = lista[295][1:]
                         x8, y8 = lista[385][1:]
                         cv2.line(frame, (x7, y7), (x8, y8), (0, 0, 255), 3)
-                        distanciaCejaIzq = self.distance_calculator(x7, x8, y7, y8)
+                        distanciaCejaIzq = self.distanceCalculator(x7, x8, y7, y8)
 
                         distanciaCejas = (distanciaCejaDer + distanciaCejaIzq) / 2
 
@@ -151,13 +151,13 @@ class EmotionRecognition(Screen):
                         x9, y9 = lista[410][1:]
                         x10, y10 = lista[427][1:]
                         cv2.line(frame, (x9, y9), (x10, y10), (0, 0, 255), 3)
-                        distainciaMejillaIzq = self.distance_calculator(x9, x10, y9, y10)
+                        distainciaMejillaIzq = self.distanceCalculator(x9, x10, y9, y10)
 
                         # Mejilla Der
                         x11, y11 = lista[186][1:]
                         x12, y12 = lista[207][1:]
                         cv2.line(frame, (x11, y11), (x12, y12), (0, 0, 255), 3)
-                        distainciaMejillaDer = self.distance_calculator(x11, x12, y11, y12)
+                        distainciaMejillaDer = self.distanceCalculator(x11, x12, y11, y12)
 
                         distanciaMejillas = (distainciaMejillaDer + distainciaMejillaIzq) / 2
 
@@ -165,13 +165,13 @@ class EmotionRecognition(Screen):
                         x13, y13 = lista[346][1:]
                         x14, y14 = lista[340][1:]
                         cv2.line(frame, (x13, y13), (x14, y14), (0, 0, 255), 3)
-                        distanciaPataGalloIzq = self.distance_calculator(x13, x14, y13, y14)
+                        distanciaPataGalloIzq = self.distanceCalculator(x13, x14, y13, y14)
 
                         # Pata Gallo Der
                         x15, y15 = lista[117][1:]
                         x16, y16 = lista[111][1:]
                         cv2.line(frame, (x15, y15), (x16, y16), (0, 0, 255), 3)
-                        distanciaPataGalloDer = self.distance_calculator(x15, x16, y15, y16)
+                        distanciaPataGalloDer = self.distanceCalculator(x15, x16, y15, y16)
 
                         distanciaPataGallo = (distanciaPataGalloDer + distanciaPataGalloIzq) / 2
 
@@ -179,13 +179,13 @@ class EmotionRecognition(Screen):
                         x17, y17 = lista[448][1:]
                         x18, y18 = lista[342][1:]
                         cv2.line(frame, (x17, y17), (x18, y18), (0, 0, 255), 3)
-                        distanciaPataGalloIzq2 = self.distance_calculator(x17, x18, y17, y18)
+                        distanciaPataGalloIzq2 = self.distanceCalculator(x17, x18, y17, y18)
 
                         # Pata Gallo Der 2
                         x19, y19 = lista[228][1:]
                         x20, y20 = lista[113][1:]
                         cv2.line(frame, (x19, y19), (x20, y20), (0, 0, 255), 3)
-                        distanciaPataGalloDer2 = self.distance_calculator(x19, x20, y19, y20)
+                        distanciaPataGalloDer2 = self.distanceCalculator(x19, x20, y19, y20)
 
                         distanciaPataGallo2 = (distanciaPataGalloIzq2 + distanciaPataGalloDer2) / 2
 
